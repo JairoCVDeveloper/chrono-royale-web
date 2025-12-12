@@ -1,5 +1,5 @@
 # chrono-royale-web
-protecto del curso lenguaje de marcas 
+proyecto del curso lenguaje de marcas 
 
 Integrantes 
 
