@@ -3,7 +3,7 @@ proyecto del curso lenguaje de marcas
 
 Integrantes 
 
-Jairo Caqui Vargas
+Jairo Caqui Vargas - JairoCVDeveloper
 
 ALVARO GOMEZ GARCIA - 
 
