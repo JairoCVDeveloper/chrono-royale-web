@@ -3,11 +3,11 @@ protecto del curso lenguaje de marcas
 
 Integrantes 
 
-Jairo Caqui Vargas
+Jairo Caqui Vargas -
 
 ALVARO GOMEZ GARCIA - 
 
 DOMINGO COSTA JAVIER - Javidomingocosta
 
-IVAN LOPEZ BENAVENT
+IVAN LOPEZ BENAVENT -
 
