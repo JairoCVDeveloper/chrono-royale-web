@@ -3,11 +3,11 @@ proyecto del curso lenguaje de marcas
 
 Integrantes 
 
-Jairo Caqui Vargas - JairoCVDeveloper
+Jairo Caqui Vargas
 
-ALVARO GOMEZ GARCIA
+ALVARO GOMEZ GARCIA - 
 
-DOMINGO COSTA JAVIER
+DOMINGO COSTA JAVIER - Javidomingocosta
 
-IVAN LOPEZ BENAVENT
+IVAN LOPEZ BENAVENT -
 
