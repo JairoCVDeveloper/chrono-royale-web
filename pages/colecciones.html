@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Colecciones — Chrono Royale</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+
+<body class="cr-body">
+
+<!-- NAVBAR (MISMO QUE INDEX) -->
+<nav class="navbar navbar-expand-lg navbar-dark cr-nav sticky-top border-bottom border-secondary-subtle">
+<div class="container py-2">
+
+<a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
+<img src="../img/logo.png" class="cr-logo">
+<div>
+<span class="cr-brand-title">CHRONO ROYAL</span>
+<span class="cr-brand-sub">Chrono Royale</span>
+</div>
+</a>
+
+<button class="navbar-toggler ms-auto me-2" data-bs-toggle="collapse" data-bs-target="#mainNav">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="d-flex align-items-center gap-2">
+
+<button class="btn cr-icon-btn" data-bs-toggle="modal" data-bs-target="#filterModal">
+<i class="bi bi-search"></i>
+</button>
+
+<button class="btn cr-icon-btn" id="userBtn" data-bs-toggle="modal" data-bs-target="#loginModal">
+<i class="bi bi-person"></i>
+</button>
+
+<button class="btn cr-icon-btn position-relative" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+<i class="bi bi-bag"></i>
+<span id="cartBadge" class="position-absolute top-0 start-100 translate-middle badge cr-badge">0</span>
+</button>
+
+</div>
+
+<div class="collapse navbar-collapse" id="mainNav">
+<ul class="navbar-nav mx-auto">
+<li class="nav-item"><a class="nav-link active" href="./colecciones.html">Colecciones</a></li>
+<li class="nav-item"><a class="nav-link" href="./sobre-nosotros.html">Sobre Nosotros</a></li>
+<li class="nav-item"><a class="nav-link" href="./contacto.html">Contacto</a></li>
+</ul>
+</div>
+
+</div>
+</nav>
+
+<!-- HERO -->
+<header class="py-5 text-center">
+<div class="container">
+<h1 class="cr-display">Colecciones</h1>
+<p class="text-secondary">Explora nuestra selección premium de relojes suizos.</p>
+<span id="productsCount" class="text-secondary small"></span>
+</div>
+</header>
+
+<!-- GRID -->
+<section class="pb-5">
+<div class="container">
+
+<div id="productsEmpty" class="text-center text-secondary d-none">
+No hay productos con esos filtros.
+</div>
+
+<div id="productsGrid" class="row g-4"></div>
+
+</div>
+</section>
+
+<!-- MODALES + OFFCANVAS + LOGIN (YA LOS TIENES EN INDEX) -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/main.js"></script>
+
+</body>
+</html>
