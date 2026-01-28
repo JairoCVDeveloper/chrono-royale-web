@@ -1,5 +1,4 @@
-/* Chrono Royale — Estética premium negro + dorado
-   Nota: Maquetación principalmente con Bootstrap. CSS propio mínimo, centrado en identidad visual. */
+/* ESTILO BASE DE LA PÁGINA Y DEL BODY (de forma global) */
 
 :root{
   --cr-bg: #0b0b0d;
@@ -21,13 +20,15 @@
   font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
-/* Navbar */
+/* NAVBAR */
+
 .cr-nav{
   background: rgba(10,10,12,.78);
   backdrop-filter: blur(12px);
 }
 
-/* Logo navbar */
+/* Logo del navbar */
+
 .cr-logo{
   width: 48px;
   height: 48px;
@@ -41,13 +42,8 @@
   }
 }
 
-.cr-logo-sm{
-  width: 120px;
-  height: 120px;
-  object-fit: contain;
-}
+/* Estilo nombre de la marca */
 
-/* Texto marca */
 .cr-brand-title{
   font-family: "Cinzel", serif;
   letter-spacing: .08em;
@@ -56,6 +52,8 @@
   line-height: 1;
 }
 
+/* Estilo links a otras páginas del navbar */
+
 .navbar .nav-link{
   color: rgba(244,244,246,.84);
 }
@@ -63,6 +61,8 @@
 .navbar .nav-link:focus{
   color: var(--cr-gold);
 }
+
+/* Botones iconos navbar (lupa, login y carrito) */
 
 .cr-icon-btn{
   border: 1px solid rgba(215,177,90,.22);
@@ -80,11 +80,56 @@
   box-shadow: 0 0 0 .15rem rgba(215,177,90,.1);
 }
 
+/* Badge carrito */
+
 .cr-badge{
   background: linear-gradient(135deg, var(--cr-gold), var(--cr-gold-2));
   color: #0b0b0d;
   font-weight: 700;
 }
+
+/* OFFCANVAS (estilo general, usado por menú móvil y carrito) */
+
+.cr-offcanvas{
+  background: rgba(12,12,15,.98);
+  color: var(--cr-text);
+  border-left: 1px solid rgba(215,177,90,.18);
+}
+
+/* NAVBAR RESPONSIVO PARA MÓVIL */
+
+@media (max-width: 991.98px){
+
+  .cr-nav .container{
+    padding-top: .25rem !important;
+    padding-bottom: .25rem !important;
+  }
+
+  .cr-toggler{ position: relative; z-index: 1031; }
+  .cr-actions{ position: relative; z-index: 1031; }
+
+  .cr-brand-mobile{
+    position: relative;
+    z-index: 1020;
+    min-width: 0;
+  }
+
+  .cr-logo--mobile{ width: 50px; height: 50px; }
+
+  .cr-brand-title--mobile{
+    font-size: .90rem;
+    line-height: 1;
+    max-width: 100%;
+  }
+
+  .cr-icon-btn{
+    width: 30px;
+    height: 30px;
+    border-radius: 12px;
+  }
+}
+
+/* CSS UTILIDADES / LINKS / COLORES (Global) */
 
 .cr-gold{ color: var(--cr-gold) !important; }
 .cr-link-gold{
@@ -92,6 +137,8 @@
   text-decoration: none;
 }
 .cr-link-gold:hover{ color: #f0d38a; }
+
+/* HERO */
 
 .cr-hero{
   position: relative;
@@ -119,6 +166,7 @@
   letter-spacing: .04em;
 }
 .cr-h2{ font-size: clamp(1.4rem, 2.2vw, 2rem); }
+
 .cr-h3{ font-size: 1.15rem; }
 
 .cr-hero-card{
@@ -150,6 +198,7 @@
   font-weight: 700;
   border-radius: 16px;
 }
+
 .cr-btn-gold:hover{
   filter: brightness(1.03);
   color:#0b0b0d;
@@ -165,6 +214,9 @@
   border-color: rgba(215,177,90,.65);
   color: var(--cr-gold);
 }
+
+
+/* CAROUSEL PRINCIPAL DEL HERO */
 
 .cr-carousel{
   border: 1px solid rgba(215,177,90,.18);
@@ -189,6 +241,8 @@
   backdrop-filter: blur(10px);
 }
 
+/* BLOQUES DE PEQUEÑA INFO DE LAS MARCAS */
+
 .cr-brand-block{
   background: rgba(18,18,23,.80);
   border: 1px solid rgba(215,177,90,.14);
@@ -207,6 +261,7 @@
   border-radius: 22px;
 }
 
+/* FOOTER */
 .cr-footer{
   background: rgba(0,0,0,.25);
 }
@@ -235,6 +290,7 @@
 }
 .cr-social:hover{ border-color: rgba(215,177,90,.55); color: var(--cr-gold); }
 
+/* MODALES */
 .cr-modal{
   background: rgba(12,12,15,.96);
   border: 1px solid rgba(215,177,90,.18);
@@ -255,12 +311,6 @@
   box-shadow: 0 0 0 .2rem rgba(215,177,90,.12);
 }
 
-.cr-offcanvas{
-  background: rgba(12,12,15,.98);
-  color: var(--cr-text);
-  border-left: 1px solid rgba(215,177,90,.18);
-}
-
 .cr-toast{
   background: rgba(12,12,15,.96);
   border: 1px solid rgba(215,177,90,.18);
@@ -269,7 +319,8 @@
   overflow: hidden;
 }
 
-/* Util: cards de producto (colecciones) */
+/* Código para el carrito más adelante */
+
 .cr-product-card{
   background: rgba(18,18,23,.82);
   border: 1px solid rgba(215,177,90,.14);
@@ -285,36 +336,4 @@
 .cr-price{
   color: var(--cr-gold);
   font-weight: 700;
-}
-
-/* FIX CLICK NAVBAR MÓVIL */
-@media (max-width: 991.98px){
-
-  .cr-nav .container{
-    padding-top: .25rem !important;
-    padding-bottom: .25rem !important;
-  }
-
-  .cr-toggler{ position: relative; z-index: 1031; }
-  .cr-actions{ position: relative; z-index: 1031; }
-
-  .cr-brand-mobile{
-    position: relative;
-    z-index: 1020;
-    min-width: 0;
-  }
-
-  .cr-logo--mobile{ width: 50px; height: 50px; }
-
-  .cr-brand-title--mobile{
-    font-size: .90rem;
-    line-height: 1;
-    max-width: 100%;
-  }
-
-  .cr-icon-btn{
-    width: 30px;
-    height: 30px;
-    border-radius: 12px;
-  }
 }
