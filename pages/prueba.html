@@ -2,7 +2,7 @@
 <html lang="es">
   <head>
     <meta charset="utf-8" />
-    <title>Colecciones — Chrono Royale</title>
+    <title>Contacto — Chrono Royale</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link
@@ -124,25 +124,70 @@
       </div>
     </nav>
 
-    <!-- HERO -->
     <header class="py-5 text-center">
       <div class="container">
-        <h1 class="cr-display">Colecciones</h1>
-        <p class="text-secondary">
-          Explora nuestra selección premium de relojes suizos.
-        </p>
-        <span id="productsCount" class="text-secondary small"></span>
+        <h1 class="cr-display">Contacto</h1>
+        <p class="text-secondary">Asesoría privada y atención personalizada.</p>
       </div>
     </header>
 
-    <!-- GRID -->
     <section class="pb-5">
       <div class="container">
-        <div id="productsEmpty" class="text-center text-secondary d-none">
-          No hay productos con esos filtros.
-        </div>
+        <div class="row g-4">
+          <div class="col-lg-5">
+            <div class="cr-brand-block p-4">
+              <h3 class="cr-h3">Boutique Chrono Royale</h3>
+              <p class="text-secondary">
+                Avenida Prestige 120<br />
+                Madrid, España<br /><br />
 
-        <div id="productsGrid" class="row g-4"></div>
+                📞 +34 900 000 000<br />
+                ✉️ contacto@chronoroyale.com<br /><br />
+
+                Horario:<br />
+                Lunes a Viernes 10–19h<br />
+                Sábado 10–14h
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-7">
+            <form id="contactForm" class="cr-brand-block p-4 vstack gap-3">
+              <input
+                id="cName"
+                class="form-control cr-input"
+                placeholder="Nombre completo"
+              />
+              <input
+                id="cEmail"
+                type="email"
+                class="form-control cr-input"
+                placeholder="Email"
+              />
+              <input
+                id="cSubject"
+                class="form-control cr-input"
+                placeholder="Asunto"
+              />
+
+              <textarea
+                id="cMessage"
+                rows="4"
+                class="form-control cr-input"
+                placeholder="Mensaje"
+              ></textarea>
+
+              <div class="form-check">
+                <input id="cAccept" type="checkbox" class="form-check-input" />
+                <label class="form-check-label text-secondary"
+                  >Acepto política de privacidad</label
+                >
+              </div>
+
+              <button class="btn cr-btn-gold">Enviar mensaje</button>
+            </form>
+          </div>
+        </div>
       </div>
     </section>
 
