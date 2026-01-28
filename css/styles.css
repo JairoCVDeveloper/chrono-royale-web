@@ -1,0 +1,320 @@
+/* Chrono Royale — Estética premium negro + dorado
+   Nota: Maquetación principalmente con Bootstrap. CSS propio mínimo, centrado en identidad visual. */
+
+:root{
+  --cr-bg: #0b0b0d;
+  --cr-bg-2:#111114;
+  --cr-card:#121217;
+  --cr-border:#2a2a33;
+  --cr-text:#f4f4f6;
+  --cr-muted:#a9a9b3;
+  --cr-gold:#d7b15a;
+  --cr-gold-2:#b88b2a;
+  --cr-shadow: 0 18px 60px rgba(0,0,0,.55);
+}
+
+.cr-body{
+  background: radial-gradient(1200px 800px at 15% 0%, rgba(215,177,90,.08), transparent 45%),
+              radial-gradient(1000px 700px at 85% 10%, rgba(215,177,90,.06), transparent 50%),
+              var(--cr-bg);
+  color: var(--cr-text);
+  font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Navbar */
+.cr-nav{
+  background: rgba(10,10,12,.78);
+  backdrop-filter: blur(12px);
+}
+
+/* Logo navbar */
+.cr-logo{
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,.45));
+}
+@media (min-width: 992px){
+  .cr-logo{
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.cr-logo-sm{
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+/* Texto marca */
+.cr-brand-title{
+  font-family: "Cinzel", serif;
+  letter-spacing: .08em;
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.navbar .nav-link{
+  color: rgba(244,244,246,.84);
+}
+.navbar .nav-link:hover,
+.navbar .nav-link:focus{
+  color: var(--cr-gold);
+}
+
+.cr-icon-btn{
+  border: 1px solid rgba(215,177,90,.22);
+  background: rgba(17,17,20,.6);
+  color: var(--cr-text);
+  border-radius: 14px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.cr-icon-btn:hover{
+  border-color: rgba(215,177,90,.5);
+  box-shadow: 0 0 0 .15rem rgba(215,177,90,.1);
+}
+
+.cr-badge{
+  background: linear-gradient(135deg, var(--cr-gold), var(--cr-gold-2));
+  color: #0b0b0d;
+  font-weight: 700;
+}
+
+.cr-gold{ color: var(--cr-gold) !important; }
+.cr-link-gold{
+  color: var(--cr-gold);
+  text-decoration: none;
+}
+.cr-link-gold:hover{ color: #f0d38a; }
+
+.cr-hero{
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(215,177,90,.08), transparent 38%),
+    transparent;
+}
+
+.cr-kicker{
+  letter-spacing: .22em;
+  font-size: .78rem;
+  color: rgba(215,177,90,.9);
+  font-weight: 600;
+}
+
+.cr-display{
+  font-family: "Cinzel", serif;
+  font-weight: 700;
+  letter-spacing: .02em;
+  font-size: clamp(2rem, 3.4vw, 3.2rem);
+}
+
+.cr-h2, .cr-h3{
+  font-family: "Cinzel", serif;
+  letter-spacing: .04em;
+}
+.cr-h2{ font-size: clamp(1.4rem, 2.2vw, 2rem); }
+.cr-h3{ font-size: 1.15rem; }
+
+.cr-hero-card{
+  background: linear-gradient(180deg, rgba(215,177,90,.10), rgba(17,17,20,.95));
+  border: 1px solid rgba(215,177,90,.18);
+  border-radius: 22px;
+  box-shadow: var(--cr-shadow);
+}
+
+.cr-mini-card{
+  background: rgba(18,18,23,.75);
+  border: 1px solid rgba(215,177,90,.14);
+  border-radius: 18px;
+}
+
+.cr-pill{
+  background: rgba(215,177,90,.16);
+  border: 1px solid rgba(215,177,90,.22);
+  color: rgba(244,244,246,.92);
+  padding: .35rem .6rem;
+  border-radius: 999px;
+  font-size: .78rem;
+}
+
+.cr-btn-gold{
+  background: linear-gradient(135deg, var(--cr-gold), var(--cr-gold-2));
+  border: none;
+  color: #0b0b0d;
+  font-weight: 700;
+  border-radius: 16px;
+}
+.cr-btn-gold:hover{
+  filter: brightness(1.03);
+  color:#0b0b0d;
+}
+
+.cr-btn-outline{
+  background: transparent;
+  border: 1px solid rgba(215,177,90,.35);
+  color: rgba(244,244,246,.92);
+  border-radius: 16px;
+}
+.cr-btn-outline:hover{
+  border-color: rgba(215,177,90,.65);
+  color: var(--cr-gold);
+}
+
+.cr-carousel{
+  border: 1px solid rgba(215,177,90,.18);
+  border-radius: 22px;
+  box-shadow: var(--cr-shadow);
+  overflow: hidden;
+}
+
+.cr-carousel-img{
+  height: 460px;
+  object-fit: cover;
+  filter: contrast(1.05) saturate(1.05);
+}
+@media (max-width: 991px){
+  .cr-carousel-img{ height: 320px; }
+}
+
+.cr-caption-box{
+  background: rgba(10,10,12,.72);
+  border: 1px solid rgba(215,177,90,.22);
+  border-radius: 18px;
+  backdrop-filter: blur(10px);
+}
+
+.cr-brand-block{
+  background: rgba(18,18,23,.80);
+  border: 1px solid rgba(215,177,90,.14);
+  border-radius: 22px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.35);
+}
+
+.cr-divider{
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(215,177,90,.35), transparent);
+}
+
+.cr-cta{
+  background: rgba(18,18,23,.70);
+  border: 1px solid rgba(215,177,90,.16);
+  border-radius: 22px;
+}
+
+.cr-footer{
+  background: rgba(0,0,0,.25);
+}
+
+.cr-logo-sm {
+  width: 7rem;  
+  height: auto;
+}
+
+.cr-footer-link{
+  color: rgba(244,244,246,.78);
+  text-decoration: none;
+}
+.cr-footer-link:hover{ color: var(--cr-gold); }
+
+.cr-social{
+  border: 1px solid rgba(215,177,90,.22);
+  color: rgba(244,244,246,.9);
+  border-radius: 14px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(17,17,20,.6);
+}
+.cr-social:hover{ border-color: rgba(215,177,90,.55); color: var(--cr-gold); }
+
+.cr-modal{
+  background: rgba(12,12,15,.96);
+  border: 1px solid rgba(215,177,90,.18);
+  border-radius: 18px;
+  color: var(--cr-text);
+}
+
+.cr-input, .cr-select{
+  background: rgba(17,17,20,.9);
+  border: 1px solid rgba(215,177,90,.18);
+  color: var(--cr-text);
+  border-radius: 14px;
+}
+.cr-input:focus, .cr-select:focus{
+  background: rgba(17,17,20,.95);
+  color: var(--cr-text);
+  border-color: rgba(215,177,90,.55);
+  box-shadow: 0 0 0 .2rem rgba(215,177,90,.12);
+}
+
+.cr-offcanvas{
+  background: rgba(12,12,15,.98);
+  color: var(--cr-text);
+  border-left: 1px solid rgba(215,177,90,.18);
+}
+
+.cr-toast{
+  background: rgba(12,12,15,.96);
+  border: 1px solid rgba(215,177,90,.18);
+  color: var(--cr-text);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* Util: cards de producto (colecciones) */
+.cr-product-card{
+  background: rgba(18,18,23,.82);
+  border: 1px solid rgba(215,177,90,.14);
+  border-radius: 22px;
+  overflow: hidden;
+  height: 100%;
+}
+.cr-product-img{
+  height: 220px;
+  object-fit: cover;
+  width: 100%;
+}
+.cr-price{
+  color: var(--cr-gold);
+  font-weight: 700;
+}
+
+/* FIX CLICK NAVBAR MÓVIL */
+@media (max-width: 991.98px){
+
+  .cr-nav .container{
+    padding-top: .25rem !important;
+    padding-bottom: .25rem !important;
+  }
+
+  .cr-toggler{ position: relative; z-index: 1031; }
+  .cr-actions{ position: relative; z-index: 1031; }
+
+  .cr-brand-mobile{
+    position: relative;
+    z-index: 1020;
+    min-width: 0;
+  }
+
+  .cr-logo--mobile{ width: 50px; height: 50px; }
+
+  .cr-brand-title--mobile{
+    font-size: .90rem;
+    line-height: 1;
+    max-width: 100%;
+  }
+
+  .cr-icon-btn{
+    width: 30px;
+    height: 30px;
+    border-radius: 12px;
+  }
+}
