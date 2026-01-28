@@ -165,7 +165,7 @@
   font-family: "Cinzel", serif;
   letter-spacing: .04em;
 }
-.cr-h2{ font-size: clamp(1.4rem, 2.2vw, 2rem); }
+.cr-h2{ font-size: clamp(1.4rem, 2.2vw, 2rem); } 
 
 .cr-h3{ font-size: 1.15rem; }
 
