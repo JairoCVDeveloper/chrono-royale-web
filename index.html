@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Chrono Royale — Relojes de Lujo</title>
 
+    <link rel="icon" type="image/png" href="img/iconlogo.png">
+
     <!-- Conexion con Bootstrap (CDN) -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
@@ -177,162 +179,141 @@
     </div>
 
     <!--  Primera seccion - Coleccion -->
-    <header class="py-5 text-center">
-      <div class="container-fluid">
-        <div
-          class="d-flex flex-column flex-lg-row justify-content-center align-items-lg-end gap-2 mb-4"
-        >
-          <div class="text-center">
-            <h2 class="cr-h2 mb-1 text-center">NUEVA COLECCIÓN</h2>
-          </div>
-        </div>
+<header class="pt-5 pb-0 text-center">
+  <div class="container-fluid">
 
-        <div
-          id="newCollectionCarousel"
-          class="carousel slide cr-carousel"
-          data-bs-ride="carousel"
-          data-bs-interval="4000"
-        >
-          <div class="carousel-indicators">
-            <button
-              type="button"
-              data-bs-target="#newCollectionCarousel"
-              data-bs-slide-to="0"
-              class="active"
-              aria-current="true"
-              aria-label="Slide 1"
-            ></button>
-            <button
-              type="button"
-              data-bs-target="#newCollectionCarousel"
-              data-bs-slide-to="1"
-              aria-label="Slide 2"
-            ></button>
-            <button
-              type="button"
-              data-bs-target="#newCollectionCarousel"
-              data-bs-slide-to="2"
-              aria-label="Slide 3"
-            ></button>
-          </div>
-
-          <div class="carousel-inner rounded-4 overflow-hidden">
-            <div class="carousel-item active">
-              <img
-                src="img/slider-rolex.jpg"
-                class="d-block w-100 cr-carousel-img"
-                alt="Rolex — Nueva Colección"
-              />
-            </div>
-
-            <div class="carousel-item">
-              <img
-                src="img/slider-patek.jpg"
-                class="d-block w-100 cr-carousel-img"
-                alt="Patek Philippe — Nueva Colección"
-              />
-              <div class="carousel-caption text-start"></div>
-            </div>
-
-            <div class="carousel-item">
-              <img
-                src="img/slider-rm.jpg"
-                class="d-block w-100 cr-carousel-img"
-                alt="Richard Mille — Nueva Colección"
-              />
-            </div>
-          </div>
-
-          <button
-            class="carousel-control-prev"
-            type="button"
-            data-bs-target="#newCollectionCarousel"
-            data-bs-slide="prev"
-          >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Anterior</span>
-          </button>
-          <button
-            class="carousel-control-next"
-            type="button"
-            data-bs-target="#newCollectionCarousel"
-            data-bs-slide="next"
-          >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Siguiente</span>
-          </button>
-        </div>
-        <div class="cr-divider my-5"></div>
+    <div
+      class="d-flex flex-column flex-lg-row justify-content-center align-items-lg-end gap-2 mb-4"
+    >
+      <div class="text-center">
+        <h2 class="cr-h2 mb-1 text-center">NUEVA COLECCIÓN</h2>
       </div>
-    </header>
+    </div>
 
-    <!-- Seccion Nuestras Marcas - Marcas principales -->
-    <section class="py-5">
-      <div class="container-fluid">
-        <div class="row g-4">
-          <div class="col-12 col-lg-4">
-            <div class="cr-brand-block p-4 h-100">
-              <div class="d-flex justify-content-between align-items-center">
-                <h3 class="cr-h3 mb-0">Rolex</h3>
-                <i class="bi bi-crown cr-gold fs-4"></i>
-              </div>
-              <p class="text-secondary mt-2">
-                Deportivos icónicos y elegancia funcional. Un estándar del lujo
-                moderno.
-              </p>
-              <button
-                class="btn cr-btn-outline w-100"
-                data-cr-quick-filter
-                data-brand="Rolex"
-              >
-                Ver Rolex
-              </button>
-            </div>
-          </div>
+    <div
+      id="newCollectionCarousel"
+      class="carousel slide cr-carousel"
+      data-bs-ride="carousel"
+      data-bs-interval="4000"
+    >
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#newCollectionCarousel"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#newCollectionCarousel"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#newCollectionCarousel"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+      </div>
 
-          <div class="col-12 col-lg-4">
-            <div class="cr-brand-block p-4 h-100">
-              <div class="d-flex justify-content-between align-items-center">
-                <h3 class="cr-h3 mb-0">Patek Philippe</h3>
-                <i class="bi bi-award cr-gold fs-4"></i>
-              </div>
-              <p class="text-secondary mt-2">
-                Tradición y complicaciones. Piezas de colección con herencia
-                única.
-              </p>
-              <button
-                class="btn cr-btn-outline w-100"
-                data-cr-quick-filter
-                data-brand="Patek Philippe"
-              >
-                Ver Patek Philippe
-              </button>
-            </div>
-          </div>
-
-          <div class="col-12 col-lg-4">
-            <div class="cr-brand-block p-4 h-100">
-              <div class="d-flex justify-content-between align-items-center">
-                <h3 class="cr-h3 mb-0">Richard Mille</h3>
-                <i class="bi bi-lightning-charge cr-gold fs-4"></i>
-              </div>
-              <p class="text-secondary mt-2">
-                Arquitectura vanguardista y materiales de alto rendimiento.
-              </p>
-              <button
-                class="btn cr-btn-outline w-100"
-                data-cr-quick-filter
-                data-brand="Richard Mille"
-              >
-                Ver Richard Mille
-              </button>
-            </div>
-          </div>
+      <div class="carousel-inner rounded-4 overflow-hidden">
+        <div class="carousel-item active">
+          <img
+            src="img/slider-rolex.jpg"
+            class="d-block w-100 cr-carousel-img"
+            alt="Rolex — Nueva Colección"
+          />
         </div>
 
-        <!-- <div class="cr-divider my-5"></div> -->
+        <div class="carousel-item">
+          <img
+            src="img/slider-patek.jpg"
+            class="d-block w-100 cr-carousel-img"
+            alt="Patek Philippe — Nueva Colección"
+          />
+          <div class="carousel-caption text-start"></div>
+        </div>
+
+        <div class="carousel-item">
+          <img
+            src="img/slider-rm.jpg"
+            class="d-block w-100 cr-carousel-img"
+            alt="Richard Mille — Nueva Colección"
+          />
+        </div>
       </div>
-    </section>
+
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#newCollectionCarousel"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#newCollectionCarousel"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </button>
+    </div>
+
+    <div class="cr-divider my-5"></div>
+  </div>
+</header>
+
+<!-- Seccion Nuestras Marcas - Marcas principales -->
+<section class="pt-0 pb-5 px-3 px-sm-4">
+  <div class="row g-4">
+
+    <!-- ROLEX -->
+    <div class="col-12 col-lg-4">
+      <div class="position-relative h-100 rounded-4 overflow-hidden">
+        <img
+          src="https://www.perodri.es/img/contact/landscape/rolex-contact-rolex-bloor-robert-lowdon-photography-0007_r-landscape.jpeg"
+          class="w-100 h-100 object-fit-cover"
+          alt="Rolex"
+        />
+      </div>
+    </div>
+
+    <!-- PATEK PHILIPPE -->
+    <div class="col-12 col-lg-4">
+      <div class="position-relative h-100 rounded-4 overflow-hidden">
+        <img
+          src="https://berger.com.mx/wp-content/uploads/2025/05/patek-philippe-retailer-berger-mexico-cdmx-5-scaled.jpg"
+          class="w-100 h-100 object-fit-cover"
+          alt="Patek Philippe"
+        />
+      </div>
+    </div>
+
+    <!-- RICHARD MILLE -->
+    <div class="col-12 col-lg-4">
+      <div class="position-relative h-100 rounded-4 overflow-hidden">
+        <img
+          src="https://signemagazine.com/wp-content/uploads/2019/09/6bcb5-richard-mille-london-boutique-philippe-louzon-7.jpg"
+          class="w-100 h-100 object-fit-cover"
+          alt="Richard Mille"
+        />
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+    <!-- <div class="cr-divider my-5"></div> -->
 
     <!-- FOOTER -->
     <footer class="cr-footer pt-5 border-top border-secondary-subtle">
