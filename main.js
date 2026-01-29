@@ -8,30 +8,87 @@
 const STORAGE_KEYS = {
   CART: "cr_cart",
   FILTERS: "cr_filters",
-  SESSION: "cr_session"
+  SESSION: "cr_session",
 };
 
 const PRODUCTS = [
   // Rolex
-  { id: "rolex-daytona", name: "Cosmograph Daytona", brand: "Rolex", price: 29500, img: "../img/rolex-daytona.jpg" },
-  { id: "rolex-submariner", name: "Submariner Date", brand: "Rolex", price: 13900, img: "../img/rolex-submariner.jpg" },
-  { id: "rolex-gmt", name: "GMT-Master II", brand: "Rolex", price: 15800, img: "../img/rolex-gmt.jpg" },
+  {
+    id: "rolex-daytona",
+    name: "Cosmograph Daytona",
+    brand: "Rolex",
+    price: 29500,
+    img: "../img/rolex-daytona.jpg",
+  },
+  {
+    id: "rolex-submariner",
+    name: "Submariner Date",
+    brand: "Rolex",
+    price: 13900,
+    img: "../img/rolex-submariner.jpg",
+  },
+  {
+    id: "rolex-gmt",
+    name: "GMT-Master II",
+    brand: "Rolex",
+    price: 15800,
+    img: "../img/rolex-gmt.jpg",
+  },
 
   // Patek
-  { id: "patek-nautilus", name: "Nautilus", brand: "Patek Philippe", price: 98000, img: "../img/patek-nautilus.jpg" },
-  { id: "patek-aquanaut", name: "Aquanaut", brand: "Patek Philippe", price: 72000, img: "../img/patek-aquanaut.jpg" },
-  { id: "patek-grandcomp", name: "Grand Complications", brand: "Patek Philippe", price: 165000, img: "../img/patek-grandcomp.jpg" },
+  {
+    id: "patek-nautilus",
+    name: "Nautilus",
+    brand: "Patek Philippe",
+    price: 98000,
+    img: "../img/patek-nautilus.jpg",
+  },
+  {
+    id: "patek-aquanaut",
+    name: "Aquanaut",
+    brand: "Patek Philippe",
+    price: 72000,
+    img: "../img/patek-aquanaut.jpg",
+  },
+  {
+    id: "patek-grandcomp",
+    name: "Grand Complications",
+    brand: "Patek Philippe",
+    price: 165000,
+    img: "../img/patek-grandcomp.jpg",
+  },
 
   // Richard Mille
-  { id: "rm-011", name: "RM 011", brand: "Richard Mille", price: 245000, img: "../img/rm-011.jpg" },
-  { id: "rm-035", name: "RM 035", brand: "Richard Mille", price: 210000, img: "../img/rm-035.jpg" },
-  { id: "rm-055", name: "RM 055", brand: "Richard Mille", price: 275000, img: "../img/rm-055.jpg" },
+  {
+    id: "rm-011",
+    name: "RM 011",
+    brand: "Richard Mille",
+    price: 245000,
+    img: "../img/rm-011.jpg",
+  },
+  {
+    id: "rm-035",
+    name: "RM 035",
+    brand: "Richard Mille",
+    price: 210000,
+    img: "../img/rm-035.jpg",
+  },
+  {
+    id: "rm-055",
+    name: "RM 055",
+    brand: "Richard Mille",
+    price: 275000,
+    img: "../img/rm-055.jpg",
+  },
 ];
 
 // ---------- Helpers ----------
 function formatEUR(value) {
   try {
-    return new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR" }).format(value);
+    return new Intl.NumberFormat("es-ES", {
+      style: "currency",
+      currency: "EUR",
+    }).format(value);
   } catch {
     return `€${value}`;
   }
@@ -80,7 +137,9 @@ function syncLoginUI() {
 
   // Opcional: cambia tooltip/title del icono
   if (userBtn) {
-    userBtn.title = session.isLogged ? `Sesión: ${session.userEmail} (clic para gestionar)` : "Login";
+    userBtn.title = session.isLogged
+      ? `Sesión: ${session.userEmail} (clic para gestionar)`
+      : "Login";
   }
 }
 
@@ -131,7 +190,7 @@ function updateCartBadge() {
 
 function addToCart(productId) {
   const cart = getCart();
-  const found = cart.find(i => i.id === productId);
+  const found = cart.find((i) => i.id === productId);
   if (found) found.qty += 1;
   else cart.push({ id: productId, qty: 1 });
 
@@ -140,14 +199,14 @@ function addToCart(productId) {
 }
 
 function removeFromCart(productId) {
-  const cart = getCart().filter(i => i.id !== productId);
+  const cart = getCart().filter((i) => i.id !== productId);
   saveCart(cart);
   renderCartOffcanvas();
 }
 
 function setQty(productId, qty) {
   const cart = getCart();
-  const it = cart.find(i => i.id === productId);
+  const it = cart.find((i) => i.id === productId);
   if (!it) return;
 
   it.qty = Math.max(1, qty);
@@ -162,12 +221,12 @@ function emptyCart() {
 }
 
 function resolveProductById(id) {
-  return PRODUCTS.find(p => p.id === id);
+  return PRODUCTS.find((p) => p.id === id);
 }
 
 function cartTotals(cart) {
   let subtotal = 0;
-  cart.forEach(it => {
+  cart.forEach((it) => {
     const p = resolveProductById(it.id);
     if (p) subtotal += p.price * (it.qty || 0);
   });
@@ -194,10 +253,11 @@ function renderCartOffcanvas() {
     return;
   }
 
-  itemsEl.innerHTML = cart.map(it => {
-    const p = resolveProductById(it.id);
-    if (!p) return "";
-    return `
+  itemsEl.innerHTML = cart
+    .map((it) => {
+      const p = resolveProductById(it.id);
+      if (!p) return "";
+      return `
       <div class="d-flex gap-3 align-items-start">
         <img src="${p.img}" alt="${p.name}" style="width:72px;height:72px;object-fit:cover;border-radius:14px;border:1px solid rgba(215,177,90,.18)">
         <div class="flex-grow-1">
@@ -218,34 +278,35 @@ function renderCartOffcanvas() {
         </div>
       </div>
     `;
-  }).join("");
+    })
+    .join("");
 
   const { subtotal, total } = cartTotals(cart);
   subtotalEl.textContent = formatEUR(subtotal);
   totalEl.textContent = formatEUR(total);
 
   // Bind actions
-  itemsEl.querySelectorAll("[data-cr-qty-minus]").forEach(btn => {
+  itemsEl.querySelectorAll("[data-cr-qty-minus]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-cr-qty-minus");
       const cartNow = getCart();
-      const it = cartNow.find(x => x.id === id);
+      const it = cartNow.find((x) => x.id === id);
       if (!it) return;
       setQty(id, it.qty - 1);
     });
   });
 
-  itemsEl.querySelectorAll("[data-cr-qty-plus]").forEach(btn => {
+  itemsEl.querySelectorAll("[data-cr-qty-plus]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-cr-qty-plus");
       const cartNow = getCart();
-      const it = cartNow.find(x => x.id === id);
+      const it = cartNow.find((x) => x.id === id);
       if (!it) return;
       setQty(id, it.qty + 1);
     });
   });
 
-  itemsEl.querySelectorAll("[data-cr-remove]").forEach(btn => {
+  itemsEl.querySelectorAll("[data-cr-remove]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-cr-remove");
       removeFromCart(id);
@@ -261,7 +322,7 @@ function filteredProducts() {
   const min = f.min !== "" && f.min != null ? Number(f.min) : null;
   const max = f.max !== "" && f.max != null ? Number(f.max) : null;
 
-  return PRODUCTS.filter(p => {
+  return PRODUCTS.filter((p) => {
     if (brand && p.brand !== brand) return false;
     if (min != null && !Number.isNaN(min) && p.price < min) return false;
     if (max != null && !Number.isNaN(max) && p.price > max) return false;
@@ -286,37 +347,58 @@ function renderProductsGrid() {
   }
   if (empty) empty.classList.add("d-none");
 
-  grid.innerHTML = list.map(p => `
+  grid.innerHTML = list
+    .map(
+      (p) => `
     <div class="col-12 col-md-6 col-lg-4">
-      <div class="cr-product-card">
-        <img src="${p.img}" alt="${p.name}" class="cr-product-img">
-        <div class="p-4">
-          <div class="d-flex justify-content-between align-items-start gap-2">
-            <div>
-              <div class="fw-semibold">${p.name}</div>
-              <div class="text-secondary small">${p.brand}</div>
-            </div>
-            <span class="cr-pill">Premium</span>
-          </div>
-          <div class="mt-3 d-flex justify-content-between align-items-center">
-            <div class="cr-price">${formatEUR(p.price)}</div>
-            <button class="btn cr-btn-gold btn-sm" data-cr-add="${p.id}" type="button">
-              Añadir al carrito
-            </button>
-          </div>
+    <div class="cr-product-card">
+    <img src="${p.img}" alt="${p.name}" class="cr-product-img">
+    <div class="p-4">
+      <div class="d-flex justify-content-between align-items-start gap-2">
+        <div>
+          <div class="fw-semibold">${p.name}</div>
+          <div class="text-secondary small">${p.brand}</div>
+        </div>
+        <span class="cr-pill">Premium</span>
+      </div>
+
+      <div class="mt-3 d-flex justify-content-between align-items-center gap-2">
+        <div class="cr-price">${formatEUR(p.price)}</div>
+
+        <div class="d-flex gap-2">
+          <a
+            class="btn cr-btn-outline btn-sm"
+            href="producto.html?id=${encodeURIComponent(p.id)}"
+          >
+            Ver producto
+          </a>
+
+          <button
+            class="btn cr-btn-gold btn-sm"
+            data-cr-add="${p.id}"
+            type="button"
+          >
+            Añadir al carrito
+          </button>
         </div>
       </div>
     </div>
-  `).join("");
+  </div>
+</div>
+  `,
+    )
+    .join("");
 
-  grid.querySelectorAll("[data-cr-add]").forEach(btn => {
-    btn.addEventListener("click", () => addToCart(btn.getAttribute("data-cr-add")));
+  grid.querySelectorAll("[data-cr-add]").forEach((btn) => {
+    btn.addEventListener("click", () =>
+      addToCart(btn.getAttribute("data-cr-add")),
+    );
   });
 }
 
 // ---------- Quick filters en Home (bloques por marca) ----------
 function bindQuickFilters() {
-  document.querySelectorAll("[data-cr-quick-filter]").forEach(btn => {
+  document.querySelectorAll("[data-cr-quick-filter]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const brand = btn.getAttribute("data-brand") || "";
       setFilters({ brand, min: "", max: "" });
@@ -344,7 +426,8 @@ function bindFilterModal() {
 
       // Cierra modal
       const modalEl = document.getElementById("filterModal");
-      if (modalEl && window.bootstrap) bootstrap.Modal.getOrCreateInstance(modalEl).hide();
+      if (modalEl && window.bootstrap)
+        bootstrap.Modal.getOrCreateInstance(modalEl).hide();
     });
   }
 
@@ -379,7 +462,8 @@ function bindLogin() {
 
       // Cierra modal
       const modalEl = document.getElementById("loginModal");
-      if (modalEl && window.bootstrap) bootstrap.Modal.getOrCreateInstance(modalEl).hide();
+      if (modalEl && window.bootstrap)
+        bootstrap.Modal.getOrCreateInstance(modalEl).hide();
     });
   }
 
@@ -388,7 +472,8 @@ function bindLogin() {
       setSession({ isLogged: false, userEmail: "" });
       showToast("Sesión cerrada.");
       const modalEl = document.getElementById("loginModal");
-      if (modalEl && window.bootstrap) bootstrap.Modal.getOrCreateInstance(modalEl).hide();
+      if (modalEl && window.bootstrap)
+        bootstrap.Modal.getOrCreateInstance(modalEl).hide();
     });
   }
 
@@ -419,6 +504,76 @@ function bindContactForm() {
     form.reset();
     showToast("Mensaje enviado. Te responderemos pronto.");
   });
+
+  function getQueryParam(name) {
+  const url = new URL(window.location.href);
+  return url.searchParams.get(name);
+}
+
+function renderProductDetail() {
+  const wrap = document.getElementById("productCarouselWrap");
+  const titleEl = document.getElementById("productTitle");
+  const brandEl = document.getElementById("productBrand");
+  const priceEl = document.getElementById("productPrice");
+  const descEl = document.getElementById("productDesc");
+  const addBtn = document.getElementById("productAddBtn");
+
+  // Si no estamos en producto.html, salimos
+  if (!wrap || !titleEl || !brandEl || !priceEl || !descEl || !addBtn) return;
+
+  const id = getQueryParam("id");
+  const p = PRODUCTS.find(x => x.id === id);
+
+  if (!p) {
+    titleEl.textContent = "Producto no encontrado";
+    brandEl.textContent = "";
+    priceEl.textContent = "";
+    descEl.textContent = "Este producto no existe o el enlace está mal.";
+    wrap.innerHTML = "";
+    addBtn.disabled = true;
+    return;
+  }
+
+  titleEl.textContent = p.name;
+  brandEl.textContent = p.brand;
+  priceEl.textContent = formatEUR(p.price);
+
+  // Descripción básica usando info que ya tienes (sin inventar specs)
+  descEl.textContent = `Pieza premium de ${p.brand}. Consulta disponibilidad, estado y documentación con nuestro equipo.`;
+
+  // Carrusel (repetimos la misma imagen por ahora)
+  const imgs = [p.img, p.img, p.img];
+
+  wrap.innerHTML = `
+    <div id="productCarousel" class="carousel slide cr-carousel" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        ${imgs.map((_, i) => `
+          <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="${i}" class="${i === 0 ? "active" : ""}"
+            aria-current="${i === 0 ? "true" : "false"}" aria-label="Slide ${i + 1}"></button>
+        `).join("")}
+      </div>
+
+      <div class="carousel-inner rounded-4 overflow-hidden">
+        ${imgs.map((src, i) => `
+          <div class="carousel-item ${i === 0 ? "active" : ""}">
+            <img src="${src}" class="d-block w-100 cr-carousel-img" alt="${p.name}">
+          </div>
+        `).join("")}
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </button>
+    </div>
+  `;
+
+  addBtn.addEventListener("click", () => addToCart(p.id));
+}
 }
 
 // ---------- Init ----------
@@ -438,6 +593,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Render catálogo si existe
   renderProductsGrid();
 
+  // Render detalle producto si existe
+  renderProductDetail();
+
+
   // Render carrito cuando se abra el offcanvas
   const cartCanvas = document.getElementById("cartOffcanvas");
   if (cartCanvas) {
@@ -447,5 +606,4 @@ document.addEventListener("DOMContentLoaded", () => {
   // Vaciar carrito
   const emptyBtn = document.getElementById("emptyCartBtn");
   if (emptyBtn) emptyBtn.addEventListener("click", emptyCart);
-  
 });
