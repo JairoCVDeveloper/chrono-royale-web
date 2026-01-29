@@ -3,6 +3,7 @@
    - Badge del carrito en navbar
    - Modal lupa: filtros por marca + precio (se guardan y aplican en Colecciones)
    - Login modal: validación simple + sesión simulada
+   - Producto: página detalle con carrusel + añadir al carrito
 */
 
 const STORAGE_KEYS = {
@@ -11,6 +12,22 @@ const STORAGE_KEYS = {
   SESSION: "cr_session",
 };
 
+/* =========================================================
+   ASSETS: rutas consistentes entre /index.html y /pages/*
+   ========================================================= */
+function assetUrl(pathFromRoot) {
+  if (!pathFromRoot) return "";
+  const inPages = window.location.pathname.includes("/pages/");
+  // Siempre construimos desde raíz del proyecto: "img/..."
+  const clean = String(pathFromRoot).replace(/^\/+/, "");
+  return (inPages ? "../" : "") + clean;
+}
+
+/* =========================================================
+   PRODUCTS (sin inventar imágenes nuevas)
+   - Antes tenías: img: "../img/xxx.jpg"
+   - Ahora: images: ["img/xxx.jpg"]
+   ========================================================= */
 const PRODUCTS = [
   // Rolex
   {
@@ -18,21 +35,21 @@ const PRODUCTS = [
     name: "Cosmograph Daytona",
     brand: "Rolex",
     price: 29500,
-    img: "../img/rolex-daytona.jpg",
+    images: ["img/rolex-daytona.jpg"],
   },
   {
     id: "rolex-submariner",
     name: "Submariner Date",
     brand: "Rolex",
     price: 13900,
-    img: "../img/rolex-submariner.jpg",
+    images: ["img/rolex-submariner.jpg"],
   },
   {
     id: "rolex-gmt",
     name: "GMT-Master II",
     brand: "Rolex",
     price: 15800,
-    img: "../img/rolex-gmt.jpg",
+    images: ["img/rolex-gmt.jpg"],
   },
 
   // Patek
@@ -41,21 +58,21 @@ const PRODUCTS = [
     name: "Nautilus",
     brand: "Patek Philippe",
     price: 98000,
-    img: "../img/patek-nautilus.jpg",
+    images: ["img/patek-nautilus.jpg"],
   },
   {
     id: "patek-aquanaut",
     name: "Aquanaut",
     brand: "Patek Philippe",
     price: 72000,
-    img: "../img/patek-aquanaut.jpg",
+    images: ["img/patek-aquanaut.jpg"],
   },
   {
     id: "patek-grandcomp",
     name: "Grand Complications",
     brand: "Patek Philippe",
     price: 165000,
-    img: "../img/patek-grandcomp.jpg",
+    images: ["img/patek-grandcomp.jpg"],
   },
 
   // Richard Mille
@@ -64,21 +81,21 @@ const PRODUCTS = [
     name: "RM 011",
     brand: "Richard Mille",
     price: 245000,
-    img: "../img/rm-011.jpg",
+    images: ["img/rm-011.jpg"],
   },
   {
     id: "rm-035",
     name: "RM 035",
     brand: "Richard Mille",
     price: 210000,
-    img: "../img/rm-035.jpg",
+    images: ["img/rm-035.jpg"],
   },
   {
     id: "rm-055",
     name: "RM 055",
     brand: "Richard Mille",
     price: 275000,
-    img: "../img/rm-055.jpg",
+    images: ["img/rm-055.jpg"],
   },
 ];
 
@@ -105,6 +122,14 @@ function readLS(key, fallback) {
 
 function writeLS(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
+}
+
+function resolveProductById(id) {
+  return PRODUCTS.find((p) => p.id === id);
+}
+
+function productMainImage(p) {
+  return (p?.images && p.images.length ? p.images[0] : "") || "";
 }
 
 // ---------- Toast ----------
@@ -135,7 +160,6 @@ function syncLoginUI() {
 
   if (logoutBtn) logoutBtn.classList.toggle("d-none", !session.isLogged);
 
-  // Opcional: cambia tooltip/title del icono
   if (userBtn) {
     userBtn.title = session.isLogged
       ? `Sesión: ${session.userEmail} (clic para gestionar)`
@@ -153,7 +177,6 @@ function setFilters(filters) {
 }
 
 function applyFiltersToUI() {
-  // Carga filtros guardados al modal (si existe)
   const f = getFilters();
   const brandEl = document.getElementById("filterBrand");
   const minEl = document.getElementById("filterMin");
@@ -220,10 +243,6 @@ function emptyCart() {
   showToast("Carrito vaciado.");
 }
 
-function resolveProductById(id) {
-  return PRODUCTS.find((p) => p.id === id);
-}
-
 function cartTotals(cart) {
   let subtotal = 0;
   cart.forEach((it) => {
@@ -245,7 +264,9 @@ function renderCartOffcanvas() {
     itemsEl.innerHTML = `
       <div class="text-secondary">
         Tu carrito está vacío.
-        <div class="mt-2 small">Añade piezas desde <a class="cr-link-gold" href="../pages/colecciones.html">Colecciones</a>.</div>
+        <div class="mt-2 small">Añade piezas desde <a class="cr-link-gold" href="${assetUrl(
+          "pages/colecciones.html"
+        )}">Colecciones</a>.</div>
       </div>
     `;
     subtotalEl.textContent = formatEUR(0);
@@ -257,9 +278,12 @@ function renderCartOffcanvas() {
     .map((it) => {
       const p = resolveProductById(it.id);
       if (!p) return "";
+      const thumb = productMainImage(p);
+
       return `
       <div class="d-flex gap-3 align-items-start">
-        <img src="${p.img}" alt="${p.name}" style="width:72px;height:72px;object-fit:cover;border-radius:14px;border:1px solid rgba(215,177,90,.18)">
+        <img src="${assetUrl(thumb)}" alt="${p.name}"
+             style="width:72px;height:72px;object-fit:cover;border-radius:14px;border:1px solid rgba(215,177,90,.18)">
         <div class="flex-grow-1">
           <div class="fw-semibold">${p.name}</div>
           <div class="text-secondary small">${p.brand}</div>
@@ -348,55 +372,57 @@ function renderProductsGrid() {
   if (empty) empty.classList.add("d-none");
 
   grid.innerHTML = list
-    .map(
-      (p) => `
-    <div class="col-12 col-md-6 col-lg-4">
-    <div class="cr-product-card">
-    <img src="${p.img}" alt="${p.name}" class="cr-product-img">
-    <div class="p-4">
-      <div class="d-flex justify-content-between align-items-start gap-2">
-        <div>
-          <div class="fw-semibold">${p.name}</div>
-          <div class="text-secondary small">${p.brand}</div>
+    .map((p) => {
+      const mainImg = productMainImage(p);
+      return `
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="cr-product-card">
+            <img src="${assetUrl(mainImg)}" alt="${p.name}" class="cr-product-img">
+            <div class="p-4">
+              <div class="d-flex justify-content-between align-items-start gap-2">
+                <div>
+                  <div class="fw-semibold">${p.name}</div>
+                  <div class="text-secondary small">${p.brand}</div>
+                </div>
+                <span class="cr-pill">Premium</span>
+              </div>
+
+              <!-- ✅ FIX: precio arriba / botones abajo (sin scroll) -->
+
+              <div class="mt-3">
+                <!-- fila 1: precio + añadir (space-between) -->
+                <div class="d-flex justify-content-between align-items-center gap-2">
+                  <div class="cr-price mb-0">${formatEUR(p.price)}</div>
+
+                  <button class="btn cr-btn-gold btn-sm text-nowrap"
+                          data-cr-add="${p.id}" type="button">
+                    Añadir al carrito
+                  </button>
+                </div>
+
+                <!-- fila 2: ver producto ancho completo -->
+                <a class="btn cr-btn-outline btn-sm w-100 mt-3"
+                   href="producto.html?id=${encodeURIComponent(p.id)}">
+                  Ver producto
+                </a>
+              </div>
+              <!-- /FIX -->
+
+            </div>
+          </div>
         </div>
-        <span class="cr-pill">Premium</span>
-      </div>
-
-      <div class="mt-3 d-flex justify-content-between align-items-center gap-2">
-        <div class="cr-price">${formatEUR(p.price)}</div>
-
-        <div class="d-flex gap-2">
-          <a
-            class="btn cr-btn-outline btn-sm"
-            href="producto.html?id=${encodeURIComponent(p.id)}"
-          >
-            Ver producto
-          </a>
-
-          <button
-            class="btn cr-btn-gold btn-sm"
-            data-cr-add="${p.id}"
-            type="button"
-          >
-            Añadir al carrito
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-  `,
-    )
+      `;
+    })
     .join("");
 
   grid.querySelectorAll("[data-cr-add]").forEach((btn) => {
     btn.addEventListener("click", () =>
-      addToCart(btn.getAttribute("data-cr-add")),
+      addToCart(btn.getAttribute("data-cr-add"))
     );
   });
 }
 
-// ---------- Quick filters en Home (bloques por marca) ----------
+// ---------- Quick filters en Home ----------
 function bindQuickFilters() {
   document.querySelectorAll("[data-cr-quick-filter]").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -421,7 +447,7 @@ function bindFilterModal() {
       setFilters({ brand, min, max });
       showToast("Filtros aplicados.");
 
-      // Si estamos en Colecciones, re-render. Si no, solo guardamos.
+      // Re-render si hay grid (colecciones)
       renderProductsGrid();
 
       // Cierra modal
@@ -460,7 +486,6 @@ function bindLogin() {
       setSession({ isLogged: true, userEmail: email });
       showToast("Sesión iniciada.");
 
-      // Cierra modal
       const modalEl = document.getElementById("loginModal");
       if (modalEl && window.bootstrap)
         bootstrap.Modal.getOrCreateInstance(modalEl).hide();
@@ -477,11 +502,10 @@ function bindLogin() {
     });
   }
 
-  // Si está logueado, habilita botón "Cerrar sesión"
   syncLoginUI();
 }
 
-// ---------- Contact form (toast "Mensaje enviado") ----------
+// ---------- Contact form ----------
 function bindContactForm() {
   const form = document.getElementById("contactForm");
   if (!form) return;
@@ -489,7 +513,6 @@ function bindContactForm() {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    // Validación simple
     const name = (document.getElementById("cName")?.value || "").trim();
     const email = (document.getElementById("cEmail")?.value || "").trim();
     const subject = (document.getElementById("cSubject")?.value || "").trim();
@@ -504,8 +527,12 @@ function bindContactForm() {
     form.reset();
     showToast("Mensaje enviado. Te responderemos pronto.");
   });
+}
 
-  function getQueryParam(name) {
+/* =========================================================
+   PRODUCTO: página producto.html?id=...
+   ========================================================= */
+function getQueryParam(name) {
   const url = new URL(window.location.href);
   return url.searchParams.get(name);
 }
@@ -522,7 +549,7 @@ function renderProductDetail() {
   if (!wrap || !titleEl || !brandEl || !priceEl || !descEl || !addBtn) return;
 
   const id = getQueryParam("id");
-  const p = PRODUCTS.find(x => x.id === id);
+  const p = PRODUCTS.find((x) => x.id === id);
 
   if (!p) {
     titleEl.textContent = "Producto no encontrado";
@@ -538,27 +565,37 @@ function renderProductDetail() {
   brandEl.textContent = p.brand;
   priceEl.textContent = formatEUR(p.price);
 
-  // Descripción básica usando info que ya tienes (sin inventar specs)
+  // Descripción sin inventar specs
   descEl.textContent = `Pieza premium de ${p.brand}. Consulta disponibilidad, estado y documentación con nuestro equipo.`;
 
-  // Carrusel (repetimos la misma imagen por ahora)
-  const imgs = [p.img, p.img, p.img];
+  // Carrusel con images (si solo hay 1, no inventamos nuevas)
+  const imgs = (p.images && p.images.length ? p.images : []).map(assetUrl);
 
   wrap.innerHTML = `
     <div id="productCarousel" class="carousel slide cr-carousel" data-bs-ride="carousel">
       <div class="carousel-indicators">
-        ${imgs.map((_, i) => `
-          <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="${i}" class="${i === 0 ? "active" : ""}"
-            aria-current="${i === 0 ? "true" : "false"}" aria-label="Slide ${i + 1}"></button>
-        `).join("")}
+        ${imgs
+          .map(
+            (_, i) => `
+          <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="${i}"
+            class="${i === 0 ? "active" : ""}"
+            aria-current="${i === 0 ? "true" : "false"}"
+            aria-label="Slide ${i + 1}"></button>
+        `
+          )
+          .join("")}
       </div>
 
       <div class="carousel-inner rounded-4 overflow-hidden">
-        ${imgs.map((src, i) => `
+        ${imgs
+          .map(
+            (src, i) => `
           <div class="carousel-item ${i === 0 ? "active" : ""}">
             <img src="${src}" class="d-block w-100 cr-carousel-img" alt="${p.name}">
           </div>
-        `).join("")}
+        `
+          )
+          .join("")}
       </div>
 
       <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
@@ -574,14 +611,9 @@ function renderProductDetail() {
 
   addBtn.addEventListener("click", () => addToCart(p.id));
 }
-}
 
 // ---------- Init ----------
 document.addEventListener("DOMContentLoaded", () => {
-  // Ajusta rutas de imágenes según página:
-  // En index.html las imágenes de productos se usarán desde /pages => ../img/..., OK.
-  // En colecciones.html (dentro /pages) también es ../img/..., OK.
-
   updateCartBadge();
   applyFiltersToUI();
 
@@ -590,12 +622,11 @@ document.addEventListener("DOMContentLoaded", () => {
   bindLogin();
   bindContactForm();
 
-  // Render catálogo si existe
+  // Colecciones
   renderProductsGrid();
 
-  // Render detalle producto si existe
+  // Producto
   renderProductDetail();
-
 
   // Render carrito cuando se abra el offcanvas
   const cartCanvas = document.getElementById("cartOffcanvas");
