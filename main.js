@@ -93,21 +93,36 @@ const PRODUCTS = [
     name: "Nautilus 7118/1451G-001",
     brand: "Patek Philippe",
     price: 505115,
-    images: ["img/patek-nautilus-zafiro.jpg", "img/patek-nautilus-zafiro-2.jpg", "img/patek-nautilus-zafiro-3.jpg", "img/patek-nautilus-zafiro-4.jpg"],
+    images: [
+      "img/patek-nautilus-zafiro.jpg",
+      "img/patek-nautilus-zafiro-2.jpg",
+      "img/patek-nautilus-zafiro-3.jpg",
+      "img/patek-nautilus-zafiro-4.jpg",
+    ],
   },
   {
     id: "patek-nautilus-rubi",
     name: "Nautilus 7118/1452G-001",
     brand: "Patek Philippe",
     price: 505115,
-    images: ["img/patek-nautilus-rubi.jpg", "img/patek-nautilus-rubi-2.jpg", "img/patek-nautilus-rubi-3.jpg", "img/patek-nautilus-rubi-4.jpg"],
+    images: [
+      "img/patek-nautilus-rubi.jpg",
+      "img/patek-nautilus-rubi-2.jpg",
+      "img/patek-nautilus-rubi-3.jpg",
+      "img/patek-nautilus-rubi-4.jpg",
+    ],
   },
   {
     id: "patek-nautilus-esmeralda",
     name: "Nautilus 7118/1453G-001",
     brand: "Patek Philippe",
     price: 568151,
-    images: ["img/patek-nautilus-esmeralda.jpg", "img/patek-nautilus-esmeralda-2.jpg", "img/patek-nautilus-esmeralda-3.jpg", "img/patek-nautilus-esmeralda-4.jpg"],
+    images: [
+      "img/patek-nautilus-esmeralda.jpg",
+      "img/patek-nautilus-esmeralda-2.jpg",
+      "img/patek-nautilus-esmeralda-3.jpg",
+      "img/patek-nautilus-esmeralda-4.jpg",
+    ],
   },
 
   // Richard Mille
@@ -136,14 +151,14 @@ const PRODUCTS = [
     id: "rm-35-03",
     name: "RM 35-03",
     brand: "Richard Mille",
-    price: 415379, 
+    price: 415379,
     images: ["img/rm-35-03.jpg"],
   },
   {
     id: "rm-002-V2",
     name: "RM 002 V2",
     brand: "Richard Mille",
-    price: 273000, 
+    price: 273000,
     images: ["img/rm-002-V2.jpg"],
   },
 ];
@@ -158,7 +173,7 @@ const PRODUCTOSNUEVACOLECCION = [
       "img/patek-nautilus-zafiro.jpg",
       "img/patek-nautilus-zafiro-2.jpg",
       "img/patek-nautilus-zafiro-3.jpg",
-      "img/patek-nautilus-zafiro-4.jpg"
+      "img/patek-nautilus-zafiro-4.jpg",
     ],
   },
   {
@@ -170,7 +185,7 @@ const PRODUCTOSNUEVACOLECCION = [
       "img/patek-nautilus-rubi.jpg",
       "img/patek-nautilus-rubi-2.jpg",
       "img/patek-nautilus-rubi-3.jpg",
-      "img/patek-nautilus-rubi-4.jpg"
+      "img/patek-nautilus-rubi-4.jpg",
     ],
   },
   {
@@ -182,7 +197,7 @@ const PRODUCTOSNUEVACOLECCION = [
       "img/patek-nautilus-esmeralda.jpg",
       "img/patek-nautilus-esmeralda-2.jpg",
       "img/patek-nautilus-esmeralda-3.jpg",
-      "img/patek-nautilus-esmeralda-4.jpg"
+      "img/patek-nautilus-esmeralda-4.jpg",
     ],
   },
 ];
@@ -353,7 +368,7 @@ function renderCartOffcanvas() {
       <div class="text-secondary">
         Tu carrito está vacío.
         <div class="mt-2 small">Añade piezas desde <a class="cr-link-gold" href="${assetUrl(
-          "pages/colecciones.html"
+          "pages/colecciones.html",
         )}">Colecciones</a>.</div>
       </div>
     `;
@@ -452,9 +467,7 @@ function renderProductsGrid() {
 
   // 👉 Elegimos qué lista renderizar según la página
   const isNuevaColeccion = path.includes("nueva-coleccion");
-  const list = isNuevaColeccion
-    ? PRODUCTOSNUEVACOLECCION
-    : filteredProducts(); // Colecciones usa filtros
+  const list = isNuevaColeccion ? PRODUCTOSNUEVACOLECCION : filteredProducts(); // Colecciones usa filtros
 
   // Contador (si existe)
   if (countEl) countEl.textContent = `${list.length} producto(s)`;
@@ -468,9 +481,7 @@ function renderProductsGrid() {
   if (empty) empty.classList.add("d-none");
 
   // 👉 Columnas según página
-  const colClass = isNuevaColeccion
-    ? "col-12"
-    : "col-12 col-md-6 col-lg-4";
+  const colClass = isNuevaColeccion ? "col-12" : "col-12 col-md-6 col-lg-4";
 
   // Link correcto a producto.html dependiendo de si estamos dentro de /pages/
   const inPages = path.includes("/pages/");
@@ -530,11 +541,10 @@ function renderProductsGrid() {
   // Bind botones "Añadir al carrito"
   grid.querySelectorAll("[data-cr-add]").forEach((btn) => {
     btn.addEventListener("click", () =>
-      addToCart(btn.getAttribute("data-cr-add"))
+      addToCart(btn.getAttribute("data-cr-add")),
     );
   });
 }
-
 
 // ---------- Quick filters en Home ----------
 function bindQuickFilters() {
@@ -682,8 +692,15 @@ function renderProductDetail() {
   // Descripción sin inventar specs
   descEl.textContent = `Pieza premium de ${p.brand}. Consulta disponibilidad, estado y documentación con nuestro equipo.`;
 
-  // Carrusel con images (si solo hay 1, no inventamos nuevas)
+  // Carrusel con images
   const imgs = (p.images && p.images.length ? p.images : []).map(assetUrl);
+
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+  // Altura fija:
+  // - móvil: más contenida, no salta
+  // - desktop: más protagonista
+  const fixedHeight = isMobile ? "320px" : "clamp(420px, 55vh, 560px)";
 
   wrap.innerHTML = `
     <div id="productCarousel" class="carousel slide cr-carousel" data-bs-ride="carousel">
@@ -691,23 +708,29 @@ function renderProductDetail() {
         ${imgs
           .map(
             (_, i) => `
-          <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="${i}"
+          <button type="button"
+            data-bs-target="#productCarousel"
+            data-bs-slide-to="${i}"
             class="${i === 0 ? "active" : ""}"
             aria-current="${i === 0 ? "true" : "false"}"
-            aria-label="Slide ${i + 1}"></button>
-        `
+            aria-label="Slide ${i + 1}">
+          </button>
+        `,
           )
           .join("")}
       </div>
 
-      <div class="carousel-inner rounded-4 overflow-hidden">
+      <div class="carousel-inner rounded-4 overflow-hidden"
+           style="height:${fixedHeight};">
         ${imgs
           .map(
             (src, i) => `
-          <div class="carousel-item ${i === 0 ? "active" : ""}">
-            <img src="${src}" class="d-block w-100 cr-carousel-img" alt="${p.name}">
+          <div class="carousel-item ${i === 0 ? "active" : ""} h-100">
+            <img src="${src}"
+                 class="d-block w-100 h-100 object-fit-cover"
+                 alt="${p.name}">
           </div>
-        `
+        `,
           )
           .join("")}
       </div>
@@ -716,6 +739,7 @@ function renderProductDetail() {
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Anterior</span>
       </button>
+
       <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Siguiente</span>
