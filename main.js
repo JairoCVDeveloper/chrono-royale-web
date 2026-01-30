@@ -51,6 +51,13 @@ const PRODUCTS = [
     price: 15800,
     images: ["img/rolex-gmt.jpg"],
   },
+  {
+    id: "rolex-datejust-36",
+    name: "Datejust 36",
+    brand: "Rolex",
+    price: 15200,
+    images: ["img/rolex-datejust-36.jpg"],
+  },
 
   // Patek
   {
@@ -74,6 +81,34 @@ const PRODUCTS = [
     price: 165000,
     images: ["img/patek-grandcomp.jpg"],
   },
+  {
+    id: "patek-perpetual-calendar",
+    name: "Perpetual Calendar 5140J",
+    brand: "Patek Philippe",
+    price: 59500,
+    images: ["img/patek-perpetual-calendar.jpg"],
+  },
+  {
+    id: "patek-nautilus-zafiro",
+    name: "Nautilus 7118/1451G-001",
+    brand: "Patek Philippe",
+    price: 505115,
+    images: ["img/patek-nautilus-zafiro.jpg", "img/patek-nautilus-zafiro-2.jpg", "img/patek-nautilus-zafiro-3.jpg", "img/patek-nautilus-zafiro-4.jpg"],
+  },
+  {
+    id: "patek-nautilus-rubi",
+    name: "Nautilus 7118/1452G-001",
+    brand: "Patek Philippe",
+    price: 505115,
+    images: ["img/patek-nautilus-rubi.jpg", "img/patek-nautilus-rubi-2.jpg", "img/patek-nautilus-rubi-3.jpg", "img/patek-nautilus-rubi-4.jpg"],
+  },
+  {
+    id: "patek-nautilus-esmeralda",
+    name: "Nautilus 7118/1453G-001",
+    brand: "Patek Philippe",
+    price: 568151,
+    images: ["img/patek-nautilus-esmeralda.jpg", "img/patek-nautilus-esmeralda-2.jpg", "img/patek-nautilus-esmeralda-3.jpg", "img/patek-nautilus-esmeralda-4.jpg"],
+  },
 
   // Richard Mille
   {
@@ -96,6 +131,20 @@ const PRODUCTS = [
     brand: "Richard Mille",
     price: 275000,
     images: ["img/rm-055.jpg"],
+  },
+  {
+    id: "rm-35-03",
+    name: "RM 35-03",
+    brand: "Richard Mille",
+    price: 415379, 
+    images: ["img/rm-35-03.jpg"],
+  },
+  {
+    id: "rm-002-V2",
+    name: "RM 002 V2",
+    brand: "Richard Mille",
+    price: 273000, 
+    images: ["img/rm-002-V2.jpg"],
   },
 ];
 
