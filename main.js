@@ -148,6 +148,45 @@ const PRODUCTS = [
   },
 ];
 
+const PRODUCTOSNUEVACOLECCION = [
+  {
+    id: "patek-nautilus-zafiro",
+    name: "Nautilus 7118/1451G-001",
+    brand: "Patek Philippe",
+    price: 505115,
+    images: [
+      "img/patek-nautilus-zafiro.jpg",
+      "img/patek-nautilus-zafiro-2.jpg",
+      "img/patek-nautilus-zafiro-3.jpg",
+      "img/patek-nautilus-zafiro-4.jpg"
+    ],
+  },
+  {
+    id: "patek-nautilus-rubi",
+    name: "Nautilus 7118/1452G-001",
+    brand: "Patek Philippe",
+    price: 505115,
+    images: [
+      "img/patek-nautilus-rubi.jpg",
+      "img/patek-nautilus-rubi-2.jpg",
+      "img/patek-nautilus-rubi-3.jpg",
+      "img/patek-nautilus-rubi-4.jpg"
+    ],
+  },
+  {
+    id: "patek-nautilus-esmeralda",
+    name: "Nautilus 7118/1453G-001",
+    brand: "Patek Philippe",
+    price: 568151,
+    images: [
+      "img/patek-nautilus-esmeralda.jpg",
+      "img/patek-nautilus-esmeralda-2.jpg",
+      "img/patek-nautilus-esmeralda-3.jpg",
+      "img/patek-nautilus-esmeralda-4.jpg"
+    ],
+  },
+];
+
 // ---------- Helpers ----------
 function formatEUR(value) {
   try {
@@ -409,10 +448,18 @@ function renderProductsGrid() {
   const countEl = document.getElementById("productsCount");
   if (!grid) return;
 
-  const list = filteredProducts();
+  const path = window.location.pathname;
 
+  // 👉 Elegimos qué lista renderizar según la página
+  const isNuevaColeccion = path.includes("nueva-coleccion");
+  const list = isNuevaColeccion
+    ? PRODUCTOSNUEVACOLECCION
+    : filteredProducts(); // Colecciones usa filtros
+
+  // Contador (si existe)
   if (countEl) countEl.textContent = `${list.length} producto(s)`;
 
+  // Empty state (si existe)
   if (list.length === 0) {
     grid.innerHTML = "";
     if (empty) empty.classList.remove("d-none");
@@ -420,13 +467,28 @@ function renderProductsGrid() {
   }
   if (empty) empty.classList.add("d-none");
 
+  // 👉 Columnas según página
+  const colClass = isNuevaColeccion
+    ? "col-12"
+    : "col-12 col-md-6 col-lg-4";
+
+  // Link correcto a producto.html dependiendo de si estamos dentro de /pages/
+  const inPages = path.includes("/pages/");
+  const productHrefBase = inPages ? "./producto.html" : "producto.html";
+
   grid.innerHTML = list
     .map((p) => {
       const mainImg = productMainImage(p);
+
       return `
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="cr-product-card">
-            <img src="${assetUrl(mainImg)}" alt="${p.name}" class="cr-product-img">
+        <div class="${colClass}">
+          <div class="cr-product-card h-100">
+            <img
+              src="${assetUrl(mainImg)}"
+              alt="${p.name}"
+              class="cr-product-img"
+            >
+
             <div class="p-4">
               <div class="d-flex justify-content-between align-items-start gap-2">
                 <div>
@@ -436,27 +498,28 @@ function renderProductsGrid() {
                 <span class="cr-pill">Premium</span>
               </div>
 
-              <!-- ✅ FIX: precio arriba / botones abajo (sin scroll) -->
-
               <div class="mt-3">
-                <!-- fila 1: precio + añadir (space-between) -->
                 <div class="d-flex justify-content-between align-items-center gap-2">
-                  <div class="cr-price mb-0">${formatEUR(p.price)}</div>
+                  <div class="cr-price mb-0">
+                    ${formatEUR(p.price)}
+                  </div>
 
-                  <button class="btn cr-btn-gold btn-sm text-nowrap"
-                          data-cr-add="${p.id}" type="button">
+                  <button
+                    class="btn cr-btn-gold btn-sm text-nowrap"
+                    data-cr-add="${p.id}"
+                    type="button"
+                  >
                     Añadir al carrito
                   </button>
                 </div>
 
-                <!-- fila 2: ver producto ancho completo -->
-                <a class="btn cr-btn-outline btn-sm w-100 mt-3"
-                   href="producto.html?id=${encodeURIComponent(p.id)}">
+                <a
+                  class="btn cr-btn-outline btn-sm w-100 mt-3"
+                  href="${productHrefBase}?id=${encodeURIComponent(p.id)}"
+                >
                   Ver producto
                 </a>
               </div>
-              <!-- /FIX -->
-
             </div>
           </div>
         </div>
@@ -464,12 +527,14 @@ function renderProductsGrid() {
     })
     .join("");
 
+  // Bind botones "Añadir al carrito"
   grid.querySelectorAll("[data-cr-add]").forEach((btn) => {
     btn.addEventListener("click", () =>
       addToCart(btn.getAttribute("data-cr-add"))
     );
   });
 }
+
 
 // ---------- Quick filters en Home ----------
 function bindQuickFilters() {
@@ -671,7 +736,7 @@ document.addEventListener("DOMContentLoaded", () => {
   bindLogin();
   bindContactForm();
 
-  // Colecciones
+  // Colecciones / Nueva Colección
   renderProductsGrid();
 
   // Producto

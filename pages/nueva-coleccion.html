@@ -2,26 +2,23 @@
 <html lang="es">
   <head>
     <meta charset="utf-8" />
+    <title>Colecciones — Chrono Royale</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Chrono Royale — Relojes de Lujo</title>
 
-    <link rel="icon" type="image/png" href="img/iconlogo.png">
+    <link rel="icon" type="image/png" href="../img/iconlogo.png" />
 
-    <!-- Conexion con Bootstrap (CDN) -->
+    <!-- Bootstrap (CDN) -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-      crossorigin="anonymous"
     />
-
-    <!-- Conexion con Bootstrap Icons (CDN) -->
+    <!-- Bootstrap Icons (CDN) -->
     <link
-      rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+      rel="stylesheet"
     />
 
-    <!-- Google Fonts Estilo CHR -->
+    <!-- Google Fonts (igual que index) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -29,8 +26,8 @@
       rel="stylesheet"
     />
 
-    <!-- Conexion con CSS -->
-    <link rel="stylesheet" href="css/styles.css" />
+    <!-- CSS propio (ruta correcta desde /pages) -->
+    <link rel="stylesheet" href="../css/styles.css" />
   </head>
 
   <body class="cr-body">
@@ -54,11 +51,11 @@
         <!-- Marca CHR para movil -->
         <a
           class="navbar-brand d-flex d-lg-none align-items-center gap-2 m-0 mx-2 order-1 flex-grow-1 justify-content-center cr-brand-mobile"
-          href="index.html"
+          href="../index.html"
           aria-label="Inicio"
         >
           <img
-            src="img/logo.png"
+            src="../img/logo.png"
             alt="Chrono Royale"
             class="cr-logo cr-logo--mobile"
           />
@@ -115,9 +112,9 @@
         <!-- Marca CHR para PC-->
         <a
           class="navbar-brand d-none d-lg-flex align-items-center gap-2 order-lg-0"
-          href="index.html"
+          href="../index.html"
         >
-          <img src="img/logo.png" alt="Chrono Royale" class="cr-logo" />
+          <img src="../img/logo.png" alt="Chrono Royale" class="cr-logo" />
           <span class="cr-brand-title">CHRONO ROYAL</span>
         </a>
 
@@ -127,22 +124,20 @@
         >
           <ul class="navbar-nav gap-lg-2">
             <li class="nav-item">
-              <a class="nav-link" href="pages/colecciones.html">Colecciones</a>
+              <a class="nav-link" href="colecciones.html">Colecciones</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/sobre-nosotros.html"
-                >Sobre Nosotros</a
-              >
+              <a class="nav-link" href="sobre-nosotros.html">Sobre Nosotros</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/contacto.html">Contacto</a>
+              <a class="nav-link" href="contacto.html">Contacto</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <!-- Navegación Menu de hamburguesa (movil) -->
+    <!-- ✅ OFFCANVAS NAV MÓVIL (AÑADIDO: en index existe, aquí faltaba) -->
     <div
       class="offcanvas offcanvas-start cr-offcanvas"
       tabindex="-1"
@@ -164,212 +159,233 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav vstack gap-1">
           <li class="nav-item">
-            <a class="nav-link" href="pages/colecciones.html">Colecciones</a>
+            <a class="nav-link" href="colecciones.html">Colecciones</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/sobre-nosotros.html"
-              >Sobre Nosotros</a
-            >
+            <a class="nav-link" href="sobre-nosotros.html">Sobre Nosotros</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/contacto.html">Contacto</a>
+            <a class="nav-link" href="contacto.html">Contacto</a>
           </li>
         </ul>
       </div>
     </div>
 
-  <!--  Primera seccion - Coleccion -->
-<header class="py-5 text-center">
-    <div class="container">
-      <h1 class="cr-display">Nueva Colección</h1>
-      <p class="text-secondary">Nautilus Haute Joaillerie.</p>
-      <br>
-    </div>
-
-    <div class="container d-flex justify-content-center mb-5">
-      <a href="pages/nueva-coleccion.html" class="btn cr-btn-outline btn-lg px-5">
-        Explorar la colección
-      </a>
-    </div>
-
-
-    <div
-      id="newCollectionCarousel"
-      class="carousel slide cr-carousel"
-      data-bs-ride="carousel"
-      data-bs-interval="4000"
-    >
-      <div class="carousel-indicators">
-        <button
-          type="button"
-          data-bs-target="#newCollectionCarousel"
-          data-bs-slide-to="0"
-          class="active"
-          aria-current="true"
-          aria-label="Slide 1"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#newCollectionCarousel"
-          data-bs-slide-to="1"
-          aria-label="Slide 2"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#newCollectionCarousel"
-          data-bs-slide-to="2"
-          aria-label="Slide 3"
-        ></button>
+    <!-- HERO -->
+    <header class="py-5">
+      <!-- Título -->
+      <div class="container text-center mb-5">
+        <h1 class="cr-display">Nueva Colección</h1>
+        <p class="text-secondary mb-0">Nautilus Haute Joaillerie.</p>
       </div>
 
-      <div class="carousel-inner rounded-4 overflow-hidden">
-        <div class="carousel-item active">
-          <img
-            src="img/slider-nueva-coleccion-patek-1.jpg"
-            class="d-block w-100 cr-carousel-img"
-            alt="Rolex — Nueva Colección"
-          />
+      <!-- Contenido: productos + texto + carrusel -->
+      <div class="container">
+        <div class="row g-4 align-items-stretch">
+          <!-- Columna izquierda: productos -->
+          <div class="col-12 col-lg-4">
+            <div id="productsGrid" class="row g-4"></div>
+          </div>
+
+          <!-- Columna derecha: texto + carrusel -->
+          <div class="col-12 col-lg-8">
+            <div class="h-100 d-flex flex-column gap-4">
+              <!-- Texto -->
+              <div
+                class="card bg-dark border border-secondary border-opacity-25 rounded-4 shadow-lg"
+              >
+                <div class="card-body p-4 p-md-5 text-start">
+                  <p class="mb-3 text-light opacity-75">
+                    Patek Philippe amplía su gama de relojes joya con tres
+                    nuevos modelos Nautilus de Alta Joyería en oro blanco que
+                    combinan 1.500 diamantes (6,53 quilates) con 876 zafiros
+                    azules (6,58 quilates, Ref. 7118/1451G-001), rubíes (6,58
+                    quilates, Ref. 7118/1452G-001) o esmeraldas talla brillante
+                    (3,68 quilates, Ref. 7118/1453G-001), engastados mediante la
+                    técnica serti neige. El bisel embellecido con piedras de
+                    colores realza el diseño reconocible al instante del
+                    Nautilus. La alternancia de diamantes en los eslabones
+                    exteriores y de piedras de color en los interiores acentúa
+                    la arquitectura original del brazalete.
+                  </p>
+
+                  <p class="mb-3 text-light opacity-75">
+                    En la caja, el bisel y el brazalete, el artesano engastador
+                    ha dispuesto las piedras según la extraordinaria técnica
+                    serti neige, jugando libremente con los diferentes diámetros
+                    para dejar la menor cantidad posible de oro entre las gemas.
+                    Un savoir-faire que requiere creatividad y pericia y que
+                    transforma cada reloj en una obra de arte única.
+                  </p>
+
+                  <p class="mb-3 text-light opacity-75">
+                    La esfera de oro blanco se distingue por hileras de
+                    diamantes talla brillante engastados en el pequeño motivo
+                    ondulado característico de la colección Nautilus Ladies. La
+                    legibilidad está garantizada por los índices horarios de oro
+                    blanco en forma de «ojiva» engastados con doce zafiros
+                    azules, rubíes o esmeraldas, las agujas horaria y minutera
+                    de oro antracita tipo «alfa» con revestimiento luminiscente
+                    blanco y el segundero central de antracita.
+                  </p>
+
+                  <p class="mb-3 text-light opacity-75">
+                    Como en todos los relojes joya de la Manufactura, el trabajo
+                    de engaste responde a las exigencias más estrictas del Sello
+                    Patek Philippe, con diamantes Top Wesselton Pure, piedras de
+                    color de primera calidad, gemas de talla impecable y un
+                    método de engaste que garantiza una excelente sujeción y
+                    superficies lisas al tacto.
+                  </p>
+
+                  <p class="mb-0 text-light opacity-75">
+                    La caja de oro blanco de 35,2 mm de diámetro alberga el
+                    calibre automático 26-330 S, con rotor central de oro de 21
+                    quilates y refinados acabados visibles a través del fondo de
+                    cristal de zafiro transparente. El brazalete está equipado
+                    con un cierre desplegable patentado por Patek Philippe,
+                    asegurado por cuatro puntos de fijación independientes para
+                    un máximo confort.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Carrusel -->
+              <div
+                id="nuevaColeccionCarousel"
+                class="carousel slide flex-grow-1"
+                data-bs-ride="carousel"
+                data-bs-interval="4000"
+              >
+                <!-- Indicadores -->
+                <div class="carousel-indicators">
+                  <button
+                    type="button"
+                    data-bs-target="#nuevaColeccionCarousel"
+                    data-bs-slide-to="0"
+                    class="active"
+                    aria-current="true"
+                    aria-label="Slide 1"
+                    onclick="this.blur()"
+                  ></button>
+
+                  <button
+                    type="button"
+                    data-bs-target="#nuevaColeccionCarousel"
+                    data-bs-slide-to="1"
+                    aria-label="Slide 2"
+                    onclick="this.blur()"
+                  ></button>
+
+                  <button
+                    type="button"
+                    data-bs-target="#nuevaColeccionCarousel"
+                    data-bs-slide-to="2"
+                    aria-label="Slide 3"
+                    onclick="this.blur()"
+                  ></button>
+
+                  <button
+                    type="button"
+                    data-bs-target="#nuevaColeccionCarousel"
+                    data-bs-slide-to="3"
+                    aria-label="Slide 4"
+                    onclick="this.blur()"
+                  ></button>
+                </div>
+
+                <!-- Slides -->
+                <div
+                  class="carousel-inner h-100 rounded-4 overflow-hidden border border-secondary border-opacity-25 shadow-lg"
+                  style="min-height: 260px"
+                >
+                  <div class="carousel-item active h-100">
+                    <img
+                      src="../img/carrusel-page-nueva-coleccion-1.jpg"
+                      class="d-block w-100 h-100 object-fit-cover"
+                      alt="Nueva Colección 1"
+                    />
+                  </div>
+
+                  <div class="carousel-item h-100">
+                    <img
+                      src="../img/carrusel-page-nueva-coleccion-2.jpg"
+                      class="d-block w-100 h-100 object-fit-cover"
+                      alt="Nueva Colección 2"
+                    />
+                  </div>
+
+                  <div class="carousel-item h-100">
+                    <img
+                      src="../img/carrusel-page-nueva-coleccion-3.jpg"
+                      class="d-block w-100 h-100 object-fit-cover"
+                      alt="Nueva Colección 3"
+                    />
+                  </div>
+
+                  <div class="carousel-item h-100">
+                    <img
+                      src="../img/carrusel-page-nueva-coleccion-4.jpg"
+                      class="d-block w-100 h-100 object-fit-cover"
+                      alt="Nueva Colección 4"
+                    />
+                  </div>
+                </div>
+
+                <!-- Flechas -->
+                <button
+                  class="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#nuevaColeccionCarousel"
+                  data-bs-slide="prev"
+                  aria-label="Anterior"
+                  onclick="this.blur()"
+                >
+                  <span
+                    class="d-flex align-items-center justify-content-center rounded-circle"
+                    style="
+                      width: 48px;
+                      height: 48px;
+                      background: rgba(0, 0, 0, 0.55);
+                    "
+                  >
+                    <span
+                      class="carousel-control-prev-icon"
+                      aria-hidden="true"
+                    ></span>
+                  </span>
+                  <span class="visually-hidden">Anterior</span>
+                </button>
+
+                <button
+                  class="carousel-control-next"
+                  type="button"
+                  data-bs-target="#nuevaColeccionCarousel"
+                  data-bs-slide="next"
+                  aria-label="Siguiente"
+                  onclick="this.blur()"
+                >
+                  <span
+                    class="d-flex align-items-center justify-content-center rounded-circle"
+                    style="
+                      width: 48px;
+                      height: 48px;
+                      background: rgba(0, 0, 0, 0.55);
+                    "
+                  >
+                    <span
+                      class="carousel-control-next-icon"
+                      aria-hidden="true"
+                    ></span>
+                  </span>
+                  <span class="visually-hidden">Siguiente</span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div class="carousel-item">
-          <img
-            src="img/slider-nueva-coleccion-patek-2.jpg"
-            class="d-block w-100 cr-carousel-img"
-            alt="Patek Philippe — Nueva Colección"
-          />
-          <div class="carousel-caption text-start"></div>
-        </div>
-
-        <div class="carousel-item">
-          <img
-            src="img/slider-nueva-coleccion-patek-3.jpg"
-            class="d-block w-100 cr-carousel-img"
-            alt="Richard Mille — Nueva Colección"
-          />
-        </div>
       </div>
-
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#newCollectionCarousel"
-        data-bs-slide="prev"
-        aria-label="Anterior"
-        onclick="this.blur()"
-      >
-        <span
-          class="d-flex align-items-center justify-content-center rounded-circle"
-          style="
-            width: 48px;
-            height: 48px;
-            background: rgba(0, 0, 0, 0.55);
-          "
-        >
-
-          <span
-            class="carousel-control-prev-icon"
-            aria-hidden="true"
-          ></span>
-        </span>
-        <span class="visually-hidden">Anterior</span>
-      </button>
-
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#newCollectionCarousel"
-        data-bs-slide="next"
-        aria-label="Siguiente"
-        onclick="this.blur()"
-      >
-        <span
-          class="d-flex align-items-center justify-content-center rounded-circle"
-          style="
-            width: 48px;
-            height: 48px;
-            background: rgba(0, 0, 0, 0.55);
-            "
-        >
-            <span
-              class="carousel-control-next-icon"
-              aria-hidden="true"
-            ></span>
-        </span>
-        <span class="visually-hidden">Siguiente</span>
-      </button>
-
-      <!-- Flechas de navegación del carrusel sin circulos negros (elegir o estos o los otros)
-      
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#newCollectionCarousel"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Anterior</span>
-      </button>
-
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#newCollectionCarousel"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Siguiente</span>
-      </button> 
-      
-      -->
-    </div>
-
-    <div class="cr-divider mt-5 mb-2"></div>
-  </div>
-</header>
-
-<!-- Seccion Nuestras Marcas - Marcas principales -->
-<section class="pt-0 pb-5 px-3 px-sm-4 ">
-  <div class="row g-4">
-
-    <!-- ROLEX -->
-    <div class="col-12 col-lg-4">
-      <div class="position-relative h-100 rounded-4 overflow-hidden">
-        <img
-          src="https://www.perodri.es/img/contact/landscape/rolex-contact-rolex-bloor-robert-lowdon-photography-0007_r-landscape.jpeg"
-          class="w-100 h-100 object-fit-cover"
-          alt="Rolex"
-        />
-      </div>
-    </div>
-
-    <!-- PATEK PHILIPPE -->
-    <div class="col-12 col-lg-4">
-      <div class="position-relative h-100 rounded-4 overflow-hidden">
-        <img
-          src="https://berger.com.mx/wp-content/uploads/2025/05/patek-philippe-retailer-berger-mexico-cdmx-5-scaled.jpg"
-          class="w-100 h-100 object-fit-cover"
-          alt="Patek Philippe"
-        />
-      </div>
-    </div>
-
-    <!-- RICHARD MILLE -->
-    <div class="col-12 col-lg-4">
-      <div class="position-relative h-100 rounded-4 overflow-hidden">
-        <img
-          src="https://signemagazine.com/wp-content/uploads/2019/09/6bcb5-richard-mille-london-boutique-philippe-louzon-7.jpg"
-          class="w-100 h-100 object-fit-cover"
-          alt="Richard Mille"
-        />
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-
-    <!-- <div class="cr-divider my-5"></div> -->
+    </header>
 
     <!-- FOOTER -->
     <footer class="cr-footer pt-5 border-top border-secondary-subtle">
@@ -377,7 +393,11 @@
         <div class="row g-4 pb-2 align-items-center">
           <div class="col-12 col-lg-4">
             <div class="d-flex flex-column align-items-center gap-2 mb-2">
-              <img src="img/logo.png" alt="Chrono Royale" class="cr-logo-sm" />
+              <img
+                src="../img/logo.png"
+                alt="Chrono Royale"
+                class="cr-logo-sm"
+              />
               <div class="fw-semibold">CHRONO ROYAL</div>
               <p class="text-secondary small mb-0">
                 Vendiendo relojes de lujo desde 1985
@@ -389,19 +409,17 @@
             <div class="fw-semibold mb-2">Secciones</div>
             <ul class="list-unstyled small m-0">
               <li>
-                <a class="cr-footer-link" href="pages/colecciones.html"
+                <a class="cr-footer-link" href="colecciones.html"
                   >Colecciones</a
                 >
               </li>
               <li>
-                <a class="cr-footer-link" href="pages/sobre-nosotros.html"
+                <a class="cr-footer-link" href="sobre-nosotros.html"
                   >Sobre Nosotros</a
                 >
               </li>
               <li>
-                <a class="cr-footer-link" href="pages/contacto.html"
-                  >Contacto</a
-                >
+                <a class="cr-footer-link" href="contacto.html">Contacto</a>
               </li>
             </ul>
           </div>
@@ -410,19 +428,17 @@
             <div class="fw-semibold mb-2">Soporte</div>
             <ul class="list-unstyled small m-0">
               <li>
-                <a class="cr-footer-link" href="pages/contacto.html"
+                <a class="cr-footer-link" href="contacto.html"
                   >Atención al cliente</a
                 >
               </li>
               <li>
-                <a class="cr-footer-link" href="./pages/contacto.html"
+                <a class="cr-footer-link" href="contacto.html"
                   >Envíos y devoluciones</a
                 >
               </li>
               <li>
-                <a class="cr-footer-link" href="pages/contacto.html"
-                  >Autenticidad</a
-                >
+                <a class="cr-footer-link" href="contacto.html">Autenticidad</a>
               </li>
             </ul>
           </div>
@@ -583,7 +599,7 @@
             >
               Vaciar carrito
             </button>
-            <a class="btn cr-btn-gold w-100" href="pages/colecciones.html"
+            <a class="btn cr-btn-gold w-100" href="colecciones.html"
               >Seguir comprando</a
             >
           </div>
@@ -591,7 +607,7 @@
       </div>
     </div>
 
-    <!-- Modal pagina registro / Log In -->
+    <!-- MODAL LOGIN -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content cr-modal">
@@ -670,14 +686,14 @@
       </div>
     </div>
 
-    <!-- Conexion de Bootstrap con JavaScript / JS -->
+    <!-- Bootstrap JS (Bundle) -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
 
-    <!-- JavaScript propio -->
-    <script src="./js/main.js"></script>
+    <!-- JavaScript propio (ruta correcta desde /pages) -->
+    <script src="../main.js"></script>
   </body>
 </html>
