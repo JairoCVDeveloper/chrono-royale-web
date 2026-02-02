@@ -179,12 +179,14 @@
     </div>
 
   <!--  Primera seccion - Coleccion -->
-<header class="py-5 text-center">
+<main class="py-5 text-center">
+  <header>
     <div class="container">
       <h1 class="cr-display">Nueva Colección</h1>
       <p class="text-secondary">Nautilus Haute Joaillerie.</p>
       <br>
     </div>
+  </header>
 
     <div class="container d-flex justify-content-center mb-5">
       <a href="pages/nueva-coleccion.html" class="btn cr-btn-outline btn-lg px-5">
@@ -322,10 +324,9 @@
       
       -->
     </div>
-
     <div class="cr-divider mt-5 mb-2"></div>
   </div>
-</header>
+</main>
 
 <!-- Seccion Nuestras Marcas - Marcas principales -->
 <section class="pt-0 pb-5 px-3 px-sm-4 ">
@@ -367,23 +368,21 @@
   </div>
 </section>
 
-<!--Modificación en curso por Javi  -->
-<!--  
 
-Secion de cada marca con sus respectivo carrusel de product
-
--->
-<!--Añadiendo 3 Marcas y 3 relojes  -->
 
     <!-- <div class="cr-divider my-5"></div> -->
 
-    <!-- FOOTER -->
+<!-- FOOTER -->
     <footer class="cr-footer pt-5 border-top border-secondary-subtle">
       <div class="container">
         <div class="row g-4 pb-2 align-items-center">
           <div class="col-12 col-lg-4">
             <div class="d-flex flex-column align-items-center gap-2 mb-2">
-              <img src="img/logo.png" alt="Chrono Royale" class="cr-logo-sm" />
+              <img
+                src="img/logo.png"
+                alt="Chrono Royale"
+                class="cr-logo-sm"
+              />
               <div class="fw-semibold">CHRONO ROYAL</div>
               <p class="text-secondary small mb-0">
                 Vendiendo relojes de lujo desde 1985
@@ -405,9 +404,7 @@ Secion de cada marca con sus respectivo carrusel de product
                 >
               </li>
               <li>
-                <a class="cr-footer-link" href="pages/contacto.html"
-                  >Contacto</a
-                >
+                <a class="cr-footer-link" href="pages/contacto.html">Contacto</a>
               </li>
             </ul>
           </div>
@@ -426,9 +423,7 @@ Secion de cada marca con sus respectivo carrusel de product
                 >
               </li>
               <li>
-                <a class="cr-footer-link" href="pages/autenticidad.html"
-                  >Autenticidad</a
-                >
+                <a class="cr-footer-link" href="pages/autenticidad.html">Autenticidad</a>
               </li>
             </ul>
           </div>
@@ -551,11 +546,13 @@ Secion de cada marca con sus respectivo carrusel de product
     </div>
 
     <!-- Pagina carrito de la compra -->
+    <!-- MODAL CARRITO -->
     <div
       class="offcanvas offcanvas-end cr-offcanvas"
       tabindex="-1"
       id="cartOffcanvas"
       aria-labelledby="cartOffcanvasLabel"
+      style="z-index: 1045"
     >
       <div class="offcanvas-header border-bottom border-secondary-subtle">
         <h5 class="offcanvas-title cr-h3 m-0" id="cartOffcanvasLabel">
@@ -568,8 +565,10 @@ Secion de cada marca con sus respectivo carrusel de product
           aria-label="Cerrar"
         ></button>
       </div>
+
       <div class="offcanvas-body d-flex flex-column">
-        <div id="cartItems" class="vstack gap-3"></div>
+        <!-- Aquí el JS pinta el aviso + productos -->
+        <div id="cartItems" class="vstack"></div>
 
         <div class="mt-auto pt-3 border-top border-secondary-subtle">
           <div class="d-flex justify-content-between mb-2">
@@ -581,18 +580,257 @@ Secion de cada marca con sus respectivo carrusel de product
             <span id="cartTotal" class="fw-semibold cr-gold">€0</span>
           </div>
 
-          <div class="d-flex gap-2">
+          <!-- Botones -->
+          <div class="d-grid gap-2">
             <button
-              class="btn cr-btn-outline w-100"
-              id="emptyCartBtn"
+              class="btn cr-btn-gold"
+              id="contactInquiryBtn"
               type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#contactInquiryModal"
             >
-              Vaciar carrito
+              Solicitar consulta
             </button>
-            <a class="btn cr-btn-gold w-100" href="pages/colecciones.html"
-              >Seguir comprando</a
-            >
+
+            <div class="d-flex gap-2">
+              <button
+                class="btn cr-btn-outline w-100"
+                id="emptyCartBtn"
+                type="button"
+              >
+                Vaciar carrito
+              </button>
+              <a class="btn cr-btn-gold w-100" href="pages/colecciones.html">
+                Seguir comprando
+              </a>
+            </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: CONTACTO / CONSULTA (se abre desde el carrito) -->
+    <div
+      class="modal fade"
+      id="contactInquiryModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content cr-modal">
+          <div class="modal-header border-secondary-subtle">
+            <h5 class="modal-title cr-h3 m-0">Solicitud de consulta</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            ></button>
+          </div>
+
+          <form id="contactInquiryForm" class="needs-validation" novalidate>
+            <div class="modal-body">
+              <!-- Intro premium -->
+              <div class="small text-secondary mb-3">
+                Completa tu solicitud y nuestro equipo se pondrá en contacto
+                para confirmar disponibilidad, estado, documentación y
+                condiciones de la pieza.
+              </div>
+
+              <div class="row g-3">
+                <!-- Datos personales (obligatorios) -->
+                <div class="col-12 col-md-6">
+                  <label class="form-label small text-secondary">Nombre</label>
+                  <input type="text" class="form-control cr-input" required />
+                  <div class="invalid-feedback">Introduce tu nombre.</div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label class="form-label small text-secondary"
+                    >Apellidos</label
+                  >
+                  <input type="text" class="form-control cr-input" required />
+                  <div class="invalid-feedback">Introduce tus apellidos.</div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label class="form-label small text-secondary"
+                    >Correo electrónico</label
+                  >
+                  <input type="email" class="form-control cr-input" required />
+                  <div class="invalid-feedback">Introduce un email válido.</div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label class="form-label small text-secondary"
+                    >Teléfono</label
+                  >
+                  <input
+                    type="tel"
+                    class="form-control cr-input"
+                    required
+                    inputmode="tel"
+                    placeholder="+34 600 000 000"
+                  />
+                  <div class="invalid-feedback">
+                    Introduce un teléfono válido.
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label class="form-label small text-secondary">País</label>
+                  <select class="form-select cr-select" required>
+                    <option value="" selected disabled>
+                      Selecciona un país
+                    </option>
+                    <option>España</option>
+                    <option>Portugal</option>
+                    <option>Francia</option>
+                    <option>Italia</option>
+                    <option>Alemania</option>
+                    <option>Suiza</option>
+                    <option>Reino Unido</option>
+                    <option>Estados Unidos</option>
+                    <option>Emiratos Árabes Unidos</option>
+                    <option>Otro</option>
+                  </select>
+                  <div class="invalid-feedback">Selecciona un país.</div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label class="form-label small text-secondary">Ciudad</label>
+                  <input type="text" class="form-control cr-input" required />
+                  <div class="invalid-feedback">Introduce tu ciudad.</div>
+                </div>
+
+                <!-- Interés de compra (clave lujo) -->
+                <div class="col-12 col-md-6">
+                  <label class="form-label small text-secondary"
+                    >Motivo del interés</label
+                  >
+                  <select class="form-select cr-select" required>
+                    <option value="" selected disabled>
+                      Selecciona una opción
+                    </option>
+                    <option>Compra personal</option>
+                    <option>Regalo</option>
+                    <option>Coleccionismo</option>
+                    <option>Inversión</option>
+                    <option>Otro</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Selecciona el motivo del interés.
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label class="form-label small text-secondary"
+                    >Horizonte temporal</label
+                  >
+                  <select class="form-select cr-select" required>
+                    <option value="" selected disabled>
+                      Selecciona una opción
+                    </option>
+                    <option>Inmediato</option>
+                    <option>1–3 meses</option>
+                    <option>3–6 meses</option>
+                    <option>Solo información</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Indica un horizonte temporal.
+                  </div>
+                </div>
+
+                <!-- Historial / relación (opcionales pero premium) -->
+                <div class="col-12 col-md-6">
+                  <label class="form-label small text-secondary"
+                    >¿Ha adquirido anteriormente relojes de alta gama?</label
+                  >
+                  <select class="form-select cr-select">
+                    <option value="" selected>Prefiero no indicarlo</option>
+                    <option>Sí</option>
+                    <option>No</option>
+                  </select>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label class="form-label small text-secondary"
+                    >¿Relación previa con nuestra boutique?</label
+                  >
+                  <select class="form-select cr-select">
+                    <option value="" selected>Prefiero no indicarlo</option>
+                    <option>Sí, soy cliente</option>
+                    <option>No todavía</option>
+                  </select>
+                </div>
+
+                <!-- Productos del carrito (auto-rellenado desde JS) -->
+                <div class="col-12 mt-2">
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="fw-semibold">Piezas seleccionadas</div>
+                    <div class="fw-semibold cr-gold" id="contactCartTotal">
+                      €0
+                    </div>
+                  </div>
+
+                  <ul id="contactCartSummary" class="list-group mt-2"></ul>
+
+                  <!-- hidden con resumen para “enviar” -->
+                  <input id="contactCartHidden" type="hidden" />
+                  <div class="form-text text-secondary">
+                    * Estas piezas se añaden automáticamente desde tu carrito.
+                  </div>
+                </div>
+
+                <!-- Observaciones (único campo libre opcional) -->
+                <div class="col-12">
+                  <label class="form-label small text-secondary"
+                    >Comentarios / Observaciones (opcional)</label
+                  >
+                  <textarea
+                    class="form-control cr-input"
+                    rows="3"
+                    placeholder="Disponibilidad, documentación, certificado, cita presencial, horario de contacto…"
+                  ></textarea>
+                </div>
+
+                <!-- Legal / informativo -->
+                <div class="col-12">
+                  <p class="small text-secondary mb-1">
+                    * Las solicitudes de consulta no constituyen una reserva ni
+                    un compromiso de compra.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Marca en esquina inferior derecha -->
+              <div
+                class="d-flex justify-content-end align-items-center gap-2 mt-4"
+              >
+                <img
+                  src="img/logo.png"
+                  alt="Chrono Royale"
+                  style="width: 28px; height: 28px; object-fit: contain"
+                />
+                <div class="small text-secondary">CHRONO ROYAL</div>
+              </div>
+            </div>
+
+            <div class="modal-footer border-secondary-subtle">
+              <button
+                type="button"
+                class="btn cr-btn-outline"
+                data-bs-dismiss="modal"
+              >
+                Cerrar
+              </button>
+              <button type="submit" class="btn cr-btn-gold">
+                Enviar solicitud
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -673,6 +911,58 @@ Secion de cada marca con sus respectivo carrusel de product
           ></button>
         </div>
         <div class="toast-body" id="globalToastBody">Acción realizada.</div>
+      </div>
+    </div>
+
+    <!-- Mensaje flotante centrado de solicitud de consulta enviada -->
+    <div
+      id="consultToastBackdrop"
+      class="d-none position-fixed top-0 start-0 w-100 h-100"
+      style="z-index: 1089; background: rgba(0, 0, 0, 0.85)"
+    ></div>
+
+    <div
+      class="position-fixed top-50 start-50 translate-middle p-3 pe-none"
+      style="z-index: 1090; width: min(520px, 92vw)"
+    >
+      <div
+        id="consultToast"
+        class="toast bg-dark text-light border border-secondary rounded-4 shadow-lg w-100 hide pe-auto"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div class="toast-header bg-dark text-light border-0 pb-2">
+          <strong class="me-auto">Chrono Royale</strong>
+          <small class="text-secondary">Ahora</small>
+          <button
+            type="button"
+            class="btn-close btn-close-white ms-2"
+            data-bs-dismiss="toast"
+            aria-label="Cerrar"
+          ></button>
+        </div>
+
+        <div class="toast-body pt-0">
+          <div
+            id="consultToastBody"
+            class="text-light"
+            style="line-height: 1.4"
+          >
+            <!-- JS inyecta el mensaje aquí -->
+          </div>
+
+          <div
+            class="d-flex justify-content-end align-items-center gap-2 mt-3"
+          >
+            <img
+              src="img/logo.png"
+              alt="Chrono Royal"
+              style="height: 25px; width: auto"
+            />
+            <span class="small text-secondary">CHRONO ROYAL</span>
+          </div>
+        </div>
       </div>
     </div>
 

@@ -4,6 +4,8 @@
    - Modal lupa: filtros por marca + precio (se guardan y aplican en Colecciones)
    - Login modal: validación simple + sesión simulada
    - Producto: página detalle con carrusel + añadir al carrito
+   - NUEVO: Modal "Contactar" desde el carrito con formulario + resumen de carrito
+   - NUEVO: Toast premium centrado + backdrop (solo al enviar solicitud, autohide)
 */
 
 const STORAGE_KEYS = {
@@ -18,15 +20,12 @@ const STORAGE_KEYS = {
 function assetUrl(pathFromRoot) {
   if (!pathFromRoot) return "";
   const inPages = window.location.pathname.includes("/pages/");
-  // Siempre construimos desde raíz del proyecto: "img/..."
   const clean = String(pathFromRoot).replace(/^\/+/, "");
   return (inPages ? "../" : "") + clean;
 }
 
 /* =========================================================
-   PRODUCTS (sin inventar imágenes nuevas)
-   - Antes tenías: img: "../img/xxx.jpg"
-   - Ahora: images: ["img/xxx.jpg"]
+   PRODUCTS
    ========================================================= */
 const PRODUCTS = [
   // Rolex
@@ -88,6 +87,7 @@ const PRODUCTS = [
     price: 59500,
     images: ["img/patek-perpetual-calendar.jpg"],
   },
+
   {
     id: "patek-nautilus-zafiro",
     name: "Nautilus 7118/1451G-001",
@@ -235,14 +235,56 @@ function productMainImage(p) {
   return (p?.images && p.images.length ? p.images[0] : "") || "";
 }
 
-// ---------- Toast ----------
+// ---------- Toast (genérico: abajo derecha, autohide) ----------
 function showToast(message) {
   const toastEl = document.getElementById("globalToast");
   const bodyEl = document.getElementById("globalToastBody");
   if (!toastEl || !bodyEl || !window.bootstrap) return;
 
   bodyEl.textContent = message;
-  const toast = bootstrap.Toast.getOrCreateInstance(toastEl, { delay: 2400 });
+  const toast = bootstrap.Toast.getOrCreateInstance(toastEl, {
+    delay: 2400,
+    autohide: true,
+  });
+  toast.show();
+}
+
+/* ===========================================================================
+   Toast solicitud enviada (solo se muestra al enviar solicitud de consulta)
+   - NO se muestra al cargar
+   - Autohide (desactivado)
+   - Backdrop oscuro mientras está visible
+   =========================================================================== */
+function showConsultToast(message) {
+  const toastEl = document.getElementById("consultToast");
+  const bodyEl = document.getElementById("consultToastBody");
+  const backdrop = document.getElementById("consultToastBackdrop");
+  if (!toastEl || !bodyEl || !window.bootstrap) return;
+
+  // Texto en el mismo color (todo blanco como el resto)
+  bodyEl.textContent = message || "";
+
+  // Enciende backdrop
+  if (backdrop) backdrop.classList.remove("d-none");
+
+  // Asegura que no se quede visible por HTML accidental
+  toastEl.classList.remove("show");
+  toastEl.classList.add("hide");
+
+  const toast = bootstrap.Toast.getOrCreateInstance(toastEl, {
+    autohide: false, // desactivado para que el usuario pueda leerlo
+    delay: 5200, // más tiempo para leer el mensaje premium
+  });
+
+  // Cuando se oculte (por tiempo o por la X), apaga backdrop
+  toastEl.addEventListener(
+    "hidden.bs.toast",
+    () => {
+      if (backdrop) backdrop.classList.add("d-none");
+    },
+    { once: true },
+  );
+
   toast.show();
 }
 
@@ -298,6 +340,7 @@ function getCart() {
 function saveCart(cart) {
   writeLS(STORAGE_KEYS.CART, cart);
   updateCartBadge();
+  updateContactButtonState();
 }
 
 function countCartItems(cart) {
@@ -355,6 +398,24 @@ function cartTotals(cart) {
   return { subtotal, total: subtotal };
 }
 
+function cartLines(cart) {
+  return cart
+    .map((it) => {
+      const p = resolveProductById(it.id);
+      if (!p) return null;
+      return { p, qty: it.qty || 0 };
+    })
+    .filter(Boolean);
+}
+
+function updateContactButtonState() {
+  const btn = document.getElementById("contactInquiryBtn");
+  if (!btn) return;
+  const hasItems = getCart().length > 0;
+  btn.disabled = !hasItems;
+  btn.setAttribute("aria-disabled", hasItems ? "false" : "true");
+}
+
 function renderCartOffcanvas() {
   const itemsEl = document.getElementById("cartItems");
   const subtotalEl = document.getElementById("cartSubtotal");
@@ -363,54 +424,68 @@ function renderCartOffcanvas() {
 
   const cart = getCart();
 
+  const noticeHTML = `
+    <div class="small text-secondary mb-3">
+      <i class="bi bi-info-circle me-1"></i>
+      Debido al valor y la exclusividad de nuestras piezas de alta joyería, la
+      adquisición se gestiona mediante una consulta previa y personalizada para
+      confirmar disponibilidad, estado, documentación y condiciones de entrega.
+      Añade las piezas de tu interés al carrito y envíanos tu solicitud.
+    </div>
+  `;
+
   if (cart.length === 0) {
     itemsEl.innerHTML = `
+      ${noticeHTML}
       <div class="text-secondary">
         Tu carrito está vacío.
-        <div class="mt-2 small">Añade piezas desde <a class="cr-link-gold" href="${assetUrl(
-          "pages/colecciones.html",
-        )}">Colecciones</a>.</div>
+        <div class="mt-2 small">
+          Añade piezas desde <a class="cr-link-gold" href="${assetUrl("pages/colecciones.html")}">Colecciones</a>.
+        </div>
       </div>
     `;
     subtotalEl.textContent = formatEUR(0);
     totalEl.textContent = formatEUR(0);
+    updateContactButtonState();
     return;
   }
 
-  itemsEl.innerHTML = cart
-    .map((it) => {
-      const p = resolveProductById(it.id);
-      if (!p) return "";
-      const thumb = productMainImage(p);
+  const lines = cartLines(cart);
 
-      return `
-      <div class="d-flex gap-3 align-items-start">
-        <img src="${assetUrl(thumb)}" alt="${p.name}"
-             style="width:72px;height:72px;object-fit:cover;border-radius:14px;border:1px solid rgba(215,177,90,.18)">
-        <div class="flex-grow-1">
-          <div class="fw-semibold">${p.name}</div>
-          <div class="text-secondary small">${p.brand}</div>
-          <div class="mt-1 fw-semibold cr-gold">${formatEUR(p.price)}</div>
+  itemsEl.innerHTML =
+    noticeHTML +
+    lines
+      .map(({ p, qty }) => {
+        const thumb = productMainImage(p);
+        return `
+          <div class="d-flex gap-3 align-items-start mb-3">
+            <img src="${assetUrl(thumb)}" alt="${p.name}"
+                 style="width:72px;height:72px;object-fit:cover;border-radius:14px;border:1px solid rgba(215,177,90,.18)">
+            <div class="flex-grow-1">
+              <div class="fw-semibold">${p.name}</div>
+              <div class="text-secondary small">${p.brand}</div>
+              <div class="mt-1 fw-semibold cr-gold">${formatEUR(p.price)}</div>
 
-          <div class="d-flex align-items-center gap-2 mt-2">
-            <button class="btn btn-sm cr-btn-outline" data-cr-qty-minus="${p.id}" type="button" aria-label="Restar">−</button>
-            <span class="text-secondary small">Cant.</span>
-            <span class="fw-semibold">${it.qty}</span>
-            <button class="btn btn-sm cr-btn-outline" data-cr-qty-plus="${p.id}" type="button" aria-label="Sumar">+</button>
+              <div class="d-flex align-items-center gap-2 mt-2">
+                <button class="btn btn-sm cr-btn-outline" data-cr-qty-minus="${p.id}" type="button" aria-label="Restar">−</button>
+                <span class="text-secondary small">Cant.</span>
+                <span class="fw-semibold">${qty}</span>
+                <button class="btn btn-sm cr-btn-outline" data-cr-qty-plus="${p.id}" type="button" aria-label="Sumar">+</button>
 
-            <button class="btn btn-sm btn-link ms-auto cr-link-gold p-0" data-cr-remove="${p.id}" type="button">
-              Eliminar
-            </button>
+                <button class="btn btn-sm btn-link ms-auto cr-link-gold p-0" data-cr-remove="${p.id}" type="button">
+                  Eliminar
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    `;
-    })
-    .join("");
+        `;
+      })
+      .join("");
 
   const { subtotal, total } = cartTotals(cart);
   subtotalEl.textContent = formatEUR(subtotal);
   totalEl.textContent = formatEUR(total);
+  updateContactButtonState();
 
   // Bind actions
   itemsEl.querySelectorAll("[data-cr-qty-minus]").forEach((btn) => {
@@ -419,7 +494,7 @@ function renderCartOffcanvas() {
       const cartNow = getCart();
       const it = cartNow.find((x) => x.id === id);
       if (!it) return;
-      setQty(id, it.qty - 1);
+      setQty(id, (it.qty || 1) - 1);
     });
   });
 
@@ -429,7 +504,7 @@ function renderCartOffcanvas() {
       const cartNow = getCart();
       const it = cartNow.find((x) => x.id === id);
       if (!it) return;
-      setQty(id, it.qty + 1);
+      setQty(id, (it.qty || 1) + 1);
     });
   });
 
@@ -439,6 +514,96 @@ function renderCartOffcanvas() {
       removeFromCart(id);
       showToast("Producto eliminado.");
     });
+  });
+}
+
+/* =========================================================
+   Modal "Contactar / Consultar disponibilidad" desde el carrito
+   - Rellena lista de productos del carrito
+   - Validación HTML5 + was-validated
+   - Toast premium centrado + backdrop (autohide)
+   ========================================================= */
+function bindContactInquiryModal() {
+  const modalEl = document.getElementById("contactInquiryModal");
+  const formEl = document.getElementById("contactInquiryForm");
+  const listEl = document.getElementById("contactCartSummary");
+  const totalEl = document.getElementById("contactCartTotal");
+  const hiddenEl = document.getElementById("contactCartHidden");
+
+  if (
+    !modalEl ||
+    !formEl ||
+    !listEl ||
+    !totalEl ||
+    !hiddenEl ||
+    !window.bootstrap
+  )
+    return;
+
+  // Rellenar al abrir
+  modalEl.addEventListener("show.bs.modal", () => {
+    const cart = getCart();
+    const lines = cartLines(cart);
+
+    if (lines.length === 0) {
+      listEl.innerHTML = `
+        <li class="list-group-item bg-transparent text-secondary">
+          No hay productos en el carrito.
+        </li>
+      `;
+      totalEl.textContent = formatEUR(0);
+      hiddenEl.value = "";
+      formEl.classList.remove("was-validated");
+      return;
+    }
+
+    listEl.innerHTML = lines
+      .map(
+        ({ p, qty }) => `
+        <li class="list-group-item bg-transparent text-light d-flex justify-content-between align-items-start gap-3">
+          <div>
+            <div class="fw-semibold">${p.name}</div>
+            <div class="small text-secondary">${p.brand}</div>
+            <div class="small text-secondary">Cantidad: ${qty}</div>
+          </div>
+          <div class="fw-semibold">${formatEUR(p.price * qty)}</div>
+        </li>
+      `,
+      )
+      .join("");
+
+    const { total } = cartTotals(cart);
+    totalEl.textContent = formatEUR(total);
+
+    hiddenEl.value = lines
+      .map(
+        ({ p, qty }) =>
+          `${p.name} (${p.brand}) x${qty} — ${formatEUR(p.price * qty)}`,
+      )
+      .join(" | ");
+
+    formEl.classList.remove("was-validated");
+  });
+
+  // Submit
+  formEl.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    if (!formEl.checkValidity()) {
+      formEl.classList.add("was-validated");
+      return;
+    }
+
+    // Cierra modal primero (UX más limpia)
+    bootstrap.Modal.getOrCreateInstance(modalEl).hide();
+
+    // Toast premium centrado + backdrop (autohide)
+    showConsultToast(
+      "Solicitud enviada correctamente. Nuestro equipo revisará la disponibilidad de las piezas seleccionadas y se pondrá en contacto a la mayor brevedad posible.",
+    );
+
+    formEl.reset();
+    formEl.classList.remove("was-validated");
   });
 }
 
@@ -464,15 +629,11 @@ function renderProductsGrid() {
   if (!grid) return;
 
   const path = window.location.pathname;
-
-  // 👉 Elegimos qué lista renderizar según la página
   const isNuevaColeccion = path.includes("nueva-coleccion");
-  const list = isNuevaColeccion ? PRODUCTOSNUEVACOLECCION : filteredProducts(); // Colecciones usa filtros
+  const list = isNuevaColeccion ? PRODUCTOSNUEVACOLECCION : filteredProducts();
 
-  // Contador (si existe)
   if (countEl) countEl.textContent = `${list.length} producto(s)`;
 
-  // Empty state (si existe)
   if (list.length === 0) {
     grid.innerHTML = "";
     if (empty) empty.classList.remove("d-none");
@@ -480,25 +641,17 @@ function renderProductsGrid() {
   }
   if (empty) empty.classList.add("d-none");
 
-  // 👉 Columnas según página
   const colClass = isNuevaColeccion ? "col-12" : "col-12 col-md-6 col-lg-4";
-
-  // Link correcto a producto.html dependiendo de si estamos dentro de /pages/
   const inPages = path.includes("/pages/");
   const productHrefBase = inPages ? "./producto.html" : "producto.html";
 
   grid.innerHTML = list
     .map((p) => {
       const mainImg = productMainImage(p);
-
       return `
         <div class="${colClass}">
           <div class="cr-product-card h-100">
-            <img
-              src="${assetUrl(mainImg)}"
-              alt="${p.name}"
-              class="cr-product-img"
-            >
+            <img src="${assetUrl(mainImg)}" alt="${p.name}" class="cr-product-img">
 
             <div class="p-4">
               <div class="d-flex justify-content-between align-items-start gap-2">
@@ -511,23 +664,16 @@ function renderProductsGrid() {
 
               <div class="mt-3">
                 <div class="d-flex justify-content-between align-items-center gap-2">
-                  <div class="cr-price mb-0">
-                    ${formatEUR(p.price)}
-                  </div>
+                  <div class="cr-price mb-0">${formatEUR(p.price)}</div>
 
-                  <button
-                    class="btn cr-btn-gold btn-sm text-nowrap"
-                    data-cr-add="${p.id}"
-                    type="button"
-                  >
+                  <button class="btn cr-btn-gold btn-sm text-nowrap"
+                          data-cr-add="${p.id}" type="button">
                     Añadir al carrito
                   </button>
                 </div>
 
-                <a
-                  class="btn cr-btn-outline btn-sm w-100 mt-3"
-                  href="${productHrefBase}?id=${encodeURIComponent(p.id)}"
-                >
+                <a class="btn cr-btn-outline btn-sm w-100 mt-3"
+                   href="${productHrefBase}?id=${encodeURIComponent(p.id)}">
                   Ver producto
                 </a>
               </div>
@@ -538,7 +684,6 @@ function renderProductsGrid() {
     })
     .join("");
 
-  // Bind botones "Añadir al carrito"
   grid.querySelectorAll("[data-cr-add]").forEach((btn) => {
     btn.addEventListener("click", () =>
       addToCart(btn.getAttribute("data-cr-add")),
@@ -570,11 +715,8 @@ function bindFilterModal() {
 
       setFilters({ brand, min, max });
       showToast("Filtros aplicados.");
-
-      // Re-render si hay grid (colecciones)
       renderProductsGrid();
 
-      // Cierra modal
       const modalEl = document.getElementById("filterModal");
       if (modalEl && window.bootstrap)
         bootstrap.Modal.getOrCreateInstance(modalEl).hide();
@@ -629,7 +771,7 @@ function bindLogin() {
   syncLoginUI();
 }
 
-// ---------- Contact form ----------
+// ---------- Contact form (página contacto.html) ----------
 function bindContactForm() {
   const form = document.getElementById("contactForm");
   if (!form) return;
@@ -637,19 +779,20 @@ function bindContactForm() {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const name = (document.getElementById("cName")?.value || "").trim();
-    const email = (document.getElementById("cEmail")?.value || "").trim();
-    const subject = (document.getElementById("cSubject")?.value || "").trim();
-    const msg = (document.getElementById("cMessage")?.value || "").trim();
-    const ok = document.getElementById("cAccept")?.checked;
+    // ✅ A partir de aquí Bootstrap muestra errores SOLO tras intentar enviar
+    form.classList.add("was-validated");
 
-    if (!name || !email || !subject || !msg || !ok) {
-      showToast("Revisa el formulario y acepta la política.");
+    if (!form.checkValidity()) {
+      // opcional: si quieres toast cuando hay errores
+      // showToast("Revisa los campos obligatorios.");
       return;
     }
 
-    form.reset();
+    // ✅ Envío OK (simulado)
     showToast("Mensaje enviado. Te responderemos pronto.");
+
+    form.reset();
+    form.classList.remove("was-validated");
   });
 }
 
@@ -669,7 +812,6 @@ function renderProductDetail() {
   const descEl = document.getElementById("productDesc");
   const addBtn = document.getElementById("productAddBtn");
 
-  // Si no estamos en producto.html, salimos
   if (!wrap || !titleEl || !brandEl || !priceEl || !descEl || !addBtn) return;
 
   const id = getQueryParam("id");
@@ -689,17 +831,10 @@ function renderProductDetail() {
   brandEl.textContent = p.brand;
   priceEl.textContent = formatEUR(p.price);
 
-  // Descripción sin inventar specs
   descEl.textContent = `Pieza premium de ${p.brand}. Consulta disponibilidad, estado y documentación con nuestro equipo.`;
 
-  // Carrusel con images
   const imgs = (p.images && p.images.length ? p.images : []).map(assetUrl);
-
   const isMobile = window.matchMedia("(max-width: 768px)").matches;
-
-  // Altura fija:
-  // - móvil: más contenida, no salta
-  // - desktop: más protagonista
   const fixedHeight = isMobile ? "320px" : "clamp(420px, 55vh, 560px)";
 
   wrap.innerHTML = `
@@ -708,29 +843,26 @@ function renderProductDetail() {
         ${imgs
           .map(
             (_, i) => `
-          <button type="button"
-            data-bs-target="#productCarousel"
-            data-bs-slide-to="${i}"
-            class="${i === 0 ? "active" : ""}"
-            aria-current="${i === 0 ? "true" : "false"}"
-            aria-label="Slide ${i + 1}">
-          </button>
-        `,
+            <button type="button"
+              data-bs-target="#productCarousel"
+              data-bs-slide-to="${i}"
+              class="${i === 0 ? "active" : ""}"
+              aria-current="${i === 0 ? "true" : "false"}"
+              aria-label="Slide ${i + 1}">
+            </button>
+          `,
           )
           .join("")}
       </div>
 
-      <div class="carousel-inner rounded-4 overflow-hidden"
-           style="height:${fixedHeight};">
+      <div class="carousel-inner rounded-4 overflow-hidden" style="height:${fixedHeight};">
         ${imgs
           .map(
             (src, i) => `
-          <div class="carousel-item ${i === 0 ? "active" : ""} h-100">
-            <img src="${src}"
-                 class="d-block w-100 h-100 object-fit-cover"
-                 alt="${p.name}">
-          </div>
-        `,
+            <div class="carousel-item ${i === 0 ? "active" : ""} h-100">
+              <img src="${src}" class="d-block w-100 h-100 object-fit-cover" alt="${p.name}">
+            </div>
+          `,
           )
           .join("")}
       </div>
@@ -760,10 +892,7 @@ document.addEventListener("DOMContentLoaded", () => {
   bindLogin();
   bindContactForm();
 
-  // Colecciones / Nueva Colección
   renderProductsGrid();
-
-  // Producto
   renderProductDetail();
 
   // Render carrito cuando se abra el offcanvas
@@ -775,4 +904,19 @@ document.addEventListener("DOMContentLoaded", () => {
   // Vaciar carrito
   const emptyBtn = document.getElementById("emptyCartBtn");
   if (emptyBtn) emptyBtn.addEventListener("click", emptyCart);
+
+  // Modal contactar desde carrito
+  bindContactInquiryModal();
+
+  // Estado inicial botón contactar
+  updateContactButtonState();
+
+  // ✅ Seguridad extra: si el HTML tuviera el toast visible por error, lo ocultamos al cargar
+  const ct = document.getElementById("consultToast");
+  if (ct) {
+    ct.classList.remove("show");
+    ct.classList.add("hide");
+  }
+  const backdrop = document.getElementById("consultToastBackdrop");
+  if (backdrop) backdrop.classList.add("d-none");
 });
