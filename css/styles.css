@@ -336,3 +336,28 @@
   color: var(--cr-gold);
   font-weight: 700;
 }
+/* Imagen grande: ocupa todo el ancho y recorta sin deformar */
+.cr-feature-img{
+  height: 520px;          /* desktop */
+  object-fit: cover;
+}
+
+/* En móvil: igual que tu carrusel principal (320px) */
+@media (max-width: 991px){
+  .cr-feature-img{
+    height: 320px;
+  }
+}
+
+/* Carrusel pequeño: recorte limpio */
+.cr-mini-carousel-img{
+  height: 220px;
+  object-fit: cover;
+}
+
+@media (max-width: 991px){
+  .cr-mini-carousel-img{
+    height: 200px;
+  }
+}
+
