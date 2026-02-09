@@ -350,10 +350,12 @@
 }
 
 /* Carrusel pequeño: recorte limpio */
-.cr-mini-carousel-img{
-  height: 220px;
-  object-fit: cover;
+.cr-mini-carousel-img {
+  height: 280px;
+  object-fit: contain;
+  background-color: #0b0b0b;  /* fondo elegante */
 }
+
 
 @media (max-width: 991px){
   .cr-mini-carousel-img{
