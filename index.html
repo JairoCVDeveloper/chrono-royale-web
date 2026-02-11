@@ -181,23 +181,30 @@
   <!--  Primera seccion - Coleccion -->
 <main class="py-5 text-center">
   <header>
-    <div class="container">
-      <h1 class="cr-display">Nueva Colección</h1>
-      <p class="text-secondary">Nautilus Haute Joaillerie.</p>
-      <br>
-    </div>
-  </header>
-
-    <div class="container d-flex justify-content-center mb-5">
-      <a href="pages/nueva-coleccion.html" class="btn cr-btn-outline btn-lg px-5">
-        Explorar la colección
+    
+    <div class="container d-flex justify-content-center mt-3 mb-2">
+      <a href="pages/nueva-coleccion.html"
+        class="btn border-0 px-3 px-sm-5 py-2 py-sm-3 text-uppercase fw-semibold text-light text-nowrap"
+        style="
+          font-family: 'Cinzel', serif;
+          letter-spacing: 5px;
+          font-size: clamp(1.4rem, 4.5vw, 2.7rem);
+          line-height: 1.1;
+        ">
+        — Nueva Colección —
       </a>
     </div>
 
 
+
+      <p class="text-secondary">Nautilus Haute Joaillerie.</p>
+    </div>
+    <br>
+  </header>
+
     <div
       id="newCollectionCarousel"
-      class="carousel slide cr-carousel"
+      class="carousel slide cr-frame rounded-4 overflow-hidden shadow"
       data-bs-ride="carousel"
       data-bs-interval="4000"
     >
@@ -224,11 +231,12 @@
         ></button>
       </div>
 
-      <div class="carousel-inner rounded-4 overflow-hidden">
+      <div class="carousel-inner">
         <div class="carousel-item active">
           <img
             src="img/slider-nueva-coleccion-patek-1.jpg"
-            class="d-block w-100 cr-carousel-img"
+            class="d-block w-100"
+            style="height:clamp(320px,45vw,520px);object-fit:cover;filter:contrast(1.05) saturate(1.05)"
             alt="Rolex — Nueva Colección"
           />
         </div>
@@ -236,7 +244,8 @@
         <div class="carousel-item">
           <img
             src="img/slider-nueva-coleccion-patek-2.jpg"
-            class="d-block w-100 cr-carousel-img"
+            class="d-block w-100"
+            style="height:clamp(320px,45vw,520px);object-fit:cover;filter:contrast(1.05) saturate(1.05)"
             alt="Patek Philippe — Nueva Colección"
           />
           <div class="carousel-caption text-start"></div>
@@ -245,7 +254,8 @@
         <div class="carousel-item">
           <img
             src="img/slider-nueva-coleccion-patek-3.jpg"
-            class="d-block w-100 cr-carousel-img"
+            class="d-block w-100"
+            style="height:clamp(320px,45vw,520px);object-fit:cover;filter:contrast(1.05) saturate(1.05)"
             alt="Richard Mille — Nueva Colección"
           />
         </div>
@@ -299,31 +309,8 @@
         </span>
         <span class="visually-hidden">Siguiente</span>
       </button>
-
-      <!-- Flechas de navegación del carrusel sin circulos negros (elegir o estos o los otros)
-      
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#newCollectionCarousel"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Anterior</span>
-      </button>
-
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#newCollectionCarousel"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Siguiente</span>
-      </button> 
-      
-      -->
     </div>
+
     <div class="cr-divider mt-5 mb-2"></div>
   </div>
 </main>
@@ -370,178 +357,218 @@
 
 <div class="cr-divider my-5"></div>
 
-<!-- Seccion Rolex -->
-<section class="pb-5 px-3 px-sm-4">
+<!-- Sección Rolex -->
+<section class="pb-5">
+  <div class="container-lg px-3 px-sm-4">
 
-  <div class="position-relative rounded-4 overflow-hidden border border-secondary-subtle">
-    <img src="img/rlmm.png" class="" alt="Rolex Sea-Dweller" style="width: 2050px" height="700px"/>
-    <div class="position-absolute bottom-0 start-0 p-4 p-md-5 text-white">
-      <h2 class="m-0 fw-bold display-6">Rolex Sea-Dweller</h2>
-      <p class="m-0 fs-5 fw-semibold">Elegancia y sofisticación</p>
-    </div>
-  </div>
-
-  <div
-    id="brandMiniCarouselRolex"
-    class="carousel slide mt-3 rounded-4 overflow-hidden border border-secondary-subtle"
-    data-bs-ride="carousel"
-    data-bs-interval="4000"
-    data-bs-touch="true"
-  >
-    <div class="carousel-inner">
-
-      <div class="carousel-item active">
-        <a href="/pages/producto.html?id=rolex-datejust-36"><img src="img/slider-rolex.png" class="d-block w-100 cr-mini-carousel-img" alt="Rolex 1" /></a>
+    <!-- Imagen principal -->
+    <div class="position-relative rounded-4 overflow-hidden border border-secondary-subtle">
+      <div class="ratio ratio-21x9">
+        <img src="img/img_principal_seccion_rolex.png" class="w-100 h-100 d-block" alt="Rolex Sea-Dweller">
       </div>
 
-      <div class="carousel-item">
-        <a href="/pages/producto.html?id=rolex-gmt"><img src="img/slider-rolex-2.png" class="d-block w-100 cr-mini-carousel-img" alt="Rolex 2" /></a>
+      <div class="position-absolute bottom-0 start-0 p-3 p-md-5 text-white">
+        <h2 class="m-0 fw-bold fs-3 fs-md-2">Rolex</h2>
+        <p class="m-0 fw-semibold fs-6 fs-md-5">Elegancia y sofisticación</p>
       </div>
-
-      <div class="carousel-item">
-        <a href="/pages/producto.html?id=rolex-submariner"><img src="img/slider-rolex-3.png" class="d-block w-100 cr-mini-carousel-img" alt="Rolex 3" /></a>
-      </div>
-
     </div>
 
-    <button class="carousel-control-prev" type="button" data-bs-target="#brandMiniCarouselRolex" data-bs-slide="prev" aria-label="Anterior" onclick="this.blur()">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Anterior</span>
-    </button>
+    <!-- Carrusel -->
+    <div id="brandMiniCarouselRolex"
+      class="carousel slide mt-3 rounded-4 overflow-hidden border border-secondary-subtle bg-black"
+      data-bs-ride="carousel"
+      data-bs-interval="4000"
+      data-bs-touch="true">
 
-    <button class="carousel-control-next" type="button" data-bs-target="#brandMiniCarouselRolex" data-bs-slide="next" aria-label="Siguiente" onclick="this.blur()">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Siguiente</span>
-    </button>
-  </div>
-</section>
+      <div class="carousel-inner">
 
-<!-- Seccion patek -->
-<section class="pb-5 px-3 px-sm-4">
+        <div class="carousel-item active">
+          <a href="/pages/producto.html?id=rolex-datejust-36" class="d-block">
+            <div class="ratio bg-black" style="--bs-aspect-ratio: 28%;">
+              <div class="d-flex justify-content-center align-items-center h-100">
+                <img src="img/slider-rolex.png" class="img-fluid" style="max-height: 100%;" alt="Rolex 1">
+              </div>
+            </div>
+          </a>
+        </div>
 
-  <div class="position-relative rounded-4 overflow-hidden border border-secondary-subtle">
-    <img
-      src="img/patek-feature.jpg"
-      style="width: 2050px" height="700px"
-      alt="Patek Philippe Nautilus"
-    />
+        <div class="carousel-item">
+          <a href="/pages/producto.html?id=rolex-gmt" class="d-block">
+            <div class="ratio bg-black" style="--bs-aspect-ratio: 28%;">
+              <div class="d-flex justify-content-center align-items-center h-100">
+                <img src="img/slider-rolex-2.png" class="img-fluid" style="max-height: 100%;" alt="Rolex 2">
+              </div>
+            </div>
+          </a>
+        </div>
 
-    <div class="position-absolute bottom-0 start-0 p-4 p-md-5 text-white">
-      <h2 class="m-0 fw-bold display-6">Patek Philippe Nautilus</h2>
-      <p class="m-0 fs-5 fw-semibold">Alta relojería suiza</p>
-    </div>
-  </div>
+        <div class="carousel-item">
+          <a href="/pages/producto.html?id=rolex-submariner" class="d-block">
+            <div class="ratio bg-black" style="--bs-aspect-ratio: 28%;">
+              <div class="d-flex justify-content-center align-items-center h-100">
+                <img src="img/slider-rolex-3.png" class="img-fluid" style="max-height: 100%;" alt="Rolex 3">
+              </div>
+            </div>
+          </a>
+        </div>
 
-  <div
-    id="brandMiniCarouselPatek"
-    class="carousel slide mt-3 rounded-4 overflow-hidden border border-secondary-subtle"
-    data-bs-ride="carousel"
-    data-bs-interval="4000"
-    data-bs-touch="true"
-  >
-    <div class="carousel-inner">
-
-      <div class="carousel-item active">
-        <a href="/pages/producto.html?id=patek-nautilus"><img
-          src="img/slider-patek-1.png"
-          class="d-block w-100 cr-mini-carousel-img"
-          alt="Patek 1"
-        /></a>
       </div>
 
-      <div class="carousel-item">
-        <a href="/pages/producto.html?id=patek-aquanaut"><img
-          src="img/slider-patek-2.png"
-          class="d-block w-100 cr-mini-carousel-img"
-          alt="Patek 2"
-        /></a>
-      </div>
+      <button class="carousel-control-prev" type="button"
+        data-bs-target="#brandMiniCarouselRolex" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
 
-      <div class="carousel-item">
-        <a href="/pages/producto.html?id=patek-perpetual-calendar"><img
-          src="img/slider-patek-3.png"
-          class="d-block w-100 cr-mini-carousel-img"
-          alt="Patek 3"
-        /></a>
-      </div>
+      <button class="carousel-control-next" type="button"
+        data-bs-target="#brandMiniCarouselRolex" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
 
     </div>
-
-    <button
-      class="carousel-control-prev"
-      type="button"
-      data-bs-target="#brandMiniCarouselPatek"
-      data-bs-slide="prev"
-      aria-label="Anterior"
-      onclick="this.blur()"
-    >
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Anterior</span>
-    </button>
-
-    <button
-      class="carousel-control-next"
-      type="button"
-      data-bs-target="#brandMiniCarouselPatek"
-      data-bs-slide="next"
-      aria-label="Siguiente"
-      onclick="this.blur()"
-    >
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Siguiente</span>
-    </button>
 
   </div>
 </section>
 
+<!-- Sección Patek -->
+<section class="pb-5">
+  <div class="container-lg px-3 px-sm-4">
 
-<!-- Seccion Richard Mille -->
- <section class="pb-5 px-3 px-sm-4">
-
-  <div class="position-relative rounded-4 overflow-hidden border border-secondary-subtle">
-  <img src="img/rmm.jpg" class="w-100 d-block cr-feature-img" alt="Richard Mille" />
-
-  <div class="position-absolute bottom-0 end-0 p-4 p-md-5 text-white text-end" style="z-index:2;">
-    <h2 class="m-0 fw-bold display-4 lh-1">Richard Mille</h2>
-    <p class="m-0 mt-2 fs-4 fw-semibold opacity-75">Ingeniería extrema</p>
-  </div>
-</div>
-
-
-  <div
-    id="brandMiniCarouselRM"
-    class="carousel slide mt-3 rounded-4 overflow-hidden border border-secondary-subtle"
-    data-bs-ride="carousel"
-    data-bs-interval="4000"
-    data-bs-touch="true"
-  >
-    <div class="carousel-inner">
-
-      <div class="carousel-item active">
-        <a href="/pages/producto.html?id=rm-055"><img src="img/rm055.png" class="d-block w-100 cr-mini-carousel-img" alt="RM 1" /></a>
+    <div class="position-relative rounded-4 overflow-hidden border border-secondary-subtle">
+      <div class="ratio ratio-21x9">
+        <img src="img/img_principal_seccion_patek.png" class="w-100 h-100 d-block" alt="Patek Philippe Nautilus">
       </div>
 
-      <div class="carousel-item">
-        <a href="/pages/producto.html?id=rm-35-03"><img src="img/rm3503.png" class="d-block w-100 cr-mini-carousel-img" alt="RM 2" /></a>
+      <div class="position-absolute bottom-0 start-0 p-3 p-md-5 text-white">
+        <h2 class="m-0 fw-bold fs-3 fs-md-2">Patek Philippe</h2>
+        <p class="m-0 fw-semibold fs-6 fs-md-5">Alta relojería suiza</p>
+      </div>
+    </div>
+
+    <div id="brandMiniCarouselPatek"
+      class="carousel slide mt-3 rounded-4 overflow-hidden border border-secondary-subtle bg-black"
+      data-bs-ride="carousel"
+      data-bs-interval="4000"
+      data-bs-touch="true">
+
+      <div class="carousel-inner">
+
+        <div class="carousel-item active">
+          <a href="/pages/producto.html?id=patek-nautilus" class="d-block">
+            <div class="ratio bg-black" style="--bs-aspect-ratio: 28%;">
+              <div class="d-flex justify-content-center align-items-center h-100">
+                <img src="img/slider-patek-1.png" class="img-fluid" style="max-height: 100%;" alt="Patek 1">
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="carousel-item">
+          <a href="/pages/producto.html?id=patek-aquanaut" class="d-block">
+            <div class="ratio bg-black" style="--bs-aspect-ratio: 28%;">
+              <div class="d-flex justify-content-center align-items-center h-100">
+                <img src="img/slider-patek-2.png" class="img-fluid" style="max-height: 100%;" alt="Patek 2">
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="carousel-item">
+          <a href="/pages/producto.html?id=patek-perpetual-calendar" class="d-block">
+            <div class="ratio bg-black" style="--bs-aspect-ratio: 28%;">
+              <div class="d-flex justify-content-center align-items-center h-100">
+                <img src="img/slider-patek-3.png" class="img-fluid" style="max-height: 100%;" alt="Patek 3">
+              </div>
+            </div>
+          </a>
+        </div>
+
       </div>
 
-      <div class="carousel-item">
-        <a href="/pages/producto.html?id=rm-035"><img src="img/rm035.png" class="d-block w-100 cr-mini-carousel-img" alt="RM 3" /></a>
-      </div>
+      <button class="carousel-control-prev" type="button"
+        data-bs-target="#brandMiniCarouselPatek" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+
+      <button class="carousel-control-next" type="button"
+        data-bs-target="#brandMiniCarouselPatek" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
 
     </div>
 
-    <button class="carousel-control-prev" type="button" data-bs-target="#brandMiniCarouselRM" data-bs-slide="prev" aria-label="Anterior" onclick="this.blur()">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Anterior</span>
-    </button>
-
-    <button class="carousel-control-next" type="button" data-bs-target="#brandMiniCarouselRM" data-bs-slide="next" aria-label="Siguiente" onclick="this.blur()">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Siguiente</span>
-    </button>
   </div>
 </section>
+
+<!-- Sección Richard Mille -->
+<section class="pb-5">
+  <div class="container-lg px-3 px-sm-4">
+
+    <div class="position-relative rounded-4 overflow-hidden border border-secondary-subtle">
+      <div class="ratio ratio-21x9">
+        <img src="img/img_principal_seccion_richard.png" class="w-100 h-100 d-block" alt="Richard Mille">
+      </div>
+
+      <div class="position-absolute bottom-0 end-0 p-3 p-md-5 text-white text-end">
+        <h2 class="m-0 fw-bold fs-3 fs-md-2">Richard Mille</h2>
+        <p class="m-0 fw-semibold fs-6 fs-md-5">Ingeniería extrema</p>
+      </div>
+    </div>
+
+    <div id="brandMiniCarouselRM"
+      class="carousel slide mt-3 rounded-4 overflow-hidden border border-secondary-subtle bg-black"
+      data-bs-ride="carousel"
+      data-bs-interval="4000"
+      data-bs-touch="true">
+
+      <div class="carousel-inner">
+
+        <div class="carousel-item active">
+          <a href="/pages/producto.html?id=rm-055" class="d-block">
+            <div class="ratio bg-black" style="--bs-aspect-ratio: 28%;">
+              <div class="d-flex justify-content-center align-items-center h-100">
+                <img src="img/rm055.png" class="img-fluid" style="max-height: 100%;" alt="RM 1">
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="carousel-item">
+          <a href="/pages/producto.html?id=rm-35-03" class="d-block">
+            <div class="ratio bg-black" style="--bs-aspect-ratio: 28%;">
+              <div class="d-flex justify-content-center align-items-center h-100">
+                <img src="img/rm3503.png" class="img-fluid" style="max-height: 100%;" alt="RM 2">
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="carousel-item">
+          <a href="/pages/producto.html?id=rm-035" class="d-block">
+            <div class="ratio bg-black" style="--bs-aspect-ratio: 28%;">
+              <div class="d-flex justify-content-center align-items-center h-100">
+                <img src="img/rm035.png" class="img-fluid" style="max-height: 100%;" alt="RM 3">
+              </div>
+            </div>
+          </a>
+        </div>
+
+      </div>
+
+      <button class="carousel-control-prev" type="button"
+        data-bs-target="#brandMiniCarouselRM" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+
+      <button class="carousel-control-next" type="button"
+        data-bs-target="#brandMiniCarouselRM" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+
+    </div>
+
+  </div>
+</section>
+
 
 
 <!-- <div class="cr-divider my-5"></div> -->
