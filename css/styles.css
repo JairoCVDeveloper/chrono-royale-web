@@ -240,7 +240,7 @@
   }
 }
 
-.cr-hover-gold {
+.cr-hover-gold {  /*colecciones*/
   transition: all 0.3s ease;
 }
 
@@ -248,13 +248,10 @@
   color: #c6a85a !important; /* usa aquí tu naranja exacto */
   transform: translateY(-2px);
 }
-/*=================================================================*/
-
-
-
 .cr-link-gold{
   color: var(--cr-gold);
   text-decoration: none;
 }
 .cr-link-gold:hover{ color: #f0d38a; }
 
+/*=================================================================*/
