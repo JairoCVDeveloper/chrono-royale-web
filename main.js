@@ -601,7 +601,9 @@ function bindContactInquiryModal() {
     showConsultToast(
       "Solicitud enviada correctamente. Nuestro equipo revisará la disponibilidad de las piezas seleccionadas y se pondrá en contacto a la mayor brevedad posible.",
     );
-
+    //  Vaciar carrito
+    emptyCart();
+    
     formEl.reset();
     formEl.classList.remove("was-validated");
   });
