@@ -241,12 +241,12 @@
 }
 
 .cr-hover-gold {
-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .cr-hover-gold:hover {
-color: #c6a85a !important; /* usa aquí tu naranja exacto */
-transform: translateY(-2px);
+  color: #c6a85a !important; /* usa aquí tu naranja exacto */
+  transform: translateY(-2px);
 }
 
 
