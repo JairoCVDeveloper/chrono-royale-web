@@ -65,7 +65,8 @@
   letter-spacing: 0.04em;
   font-size: 1.15rem;
 }
-/* new */
+
+
 .cr-kicker {
   letter-spacing: 0.22em;
   font-size: 0.78rem;
@@ -102,8 +103,6 @@
   border: 1px solid rgba(215, 177, 90, 0.22);
   backdrop-filter: blur(10px);
 }
-
-/*fin new */
 .cr-divider {
   height: 1px;
   background: linear-gradient(
@@ -113,7 +112,6 @@
     transparent
   );
 }
-/*new*/
 .cr-frame {
   border: 1px solid rgba(215, 177, 90, 0.18) !important;
 }
@@ -122,7 +120,6 @@
   border: 1px solid rgba(215, 177, 90, 0.22);
   color: rgba(244, 244, 246, 0.92);
 }
-/*fin new*/
 .cr-btn-gold {
   background: linear-gradient(135deg, var(--cr-gold), var(--cr-gold-2));
   border: none;
@@ -154,7 +151,7 @@
   box-shadow: 0 0 0 0.15rem rgba(215, 177, 90, 0.1);
   color: var(--cr-text);
 }
-/*new*/
+
 .cr-badge {
   background: linear-gradient(135deg, var(--cr-gold), var(--cr-gold-2));
   color: #0b0b0d;
@@ -164,7 +161,7 @@
   color: var(--cr-gold);
   font-weight: 700;
 }
-/*new*/
+
 .cr-link-gold {
   color: var(--cr-gold);
   text-decoration: none;
@@ -237,3 +234,48 @@
   object-fit: cover;
   width: 100%;
 }
+
+@media (max-width: 991.98px) {
+  .cr-nav .container {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+  }
+  .cr-toggler {
+    position: relative;
+    z-index: 1031;
+  }
+  .cr-actions {
+    position: relative;
+    z-index: 1031;
+  }
+  .cr-brand-mobile {
+    position: relative;
+    z-index: 1020;
+    min-width: 0;
+  }
+  .cr-logo--mobile {
+    width: 50px;
+    height: 50px;
+  }
+  .cr-brand-title--mobile {
+    font-size: 0.9rem;
+    line-height: 1;
+    max-width: 100%;
+  }
+  .cr-icon-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 12px;
+  }
+}
+.cr-social {
+  border: 1px solid rgba(215, 177, 90, 0.22);
+  color: rgba(244, 244, 246, 0.9);
+  border-radius: 14px;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  background: rgba(17, 17, 20, 0.6);
+}
+
