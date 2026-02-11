@@ -52,6 +52,7 @@
   color: var(--cr-text);
   border-radius: 14px;
   width: 44px;
+  display: inline-flex;
   height: 44px;
   align-items: center;
   justify-content: center;
