@@ -248,72 +248,9 @@
   color: #c6a85a !important; /* usa aquí tu naranja exacto */
   transform: translateY(-2px);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*=================================================================*/
-/* HERO */
-/*
-.cr-hero{
-  position: relative;
-  background:
-    linear-gradient(180deg, rgba(215,177,90,.08), transparent 38%),
-    transparent;
-}
+
+
 
 .cr-link-gold{
   color: var(--cr-gold);
@@ -321,40 +258,3 @@
 }
 .cr-link-gold:hover{ color: #f0d38a; }
 
-
-.cr-kicker{
-  letter-spacing: .22em;
-  font-size: .78rem;
-  color: rgba(215,177,90,.9);
-  font-weight: 600;
-}
-
-.cr-hero-card{
-  background: linear-gradient(180deg, rgba(215,177,90,.10), rgba(17,17,20,.95));
-  border: 1px solid rgba(215,177,90,.18);
-  border-radius: 22px;
-  box-shadow: var(--cr-shadow);
-}
-.cr-pill{
-  background: rgba(215,177,90,.16);
-  border: 1px solid rgba(215,177,90,.22);
-  color: rgba(244,244,246,.92);
-  padding: .35rem .6rem;
-  border-radius: 999px;
-  font-size: .78rem;
-}   
-
-
-.cr-caption-box{
-  background: rgba(10,10,12,.72);
-  border: 1px solid rgba(215,177,90,.22);
-  border-radius: 18px;
-  backdrop-filter: blur(10px);
-}
-  .cr-cta{
-  background: rgba(18,18,23,.70);
-  border: 1px solid rgba(215,177,90,.16);
-  border-radius: 22px;
-}
-
-*/
