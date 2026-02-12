@@ -661,7 +661,7 @@ function renderProductsGrid() {
                   <div class="fw-semibold">${p.name}</div>
                   <div class="text-secondary small">${p.brand}</div>
                 </div>
-                <span class="cr-pill">Premium</span>
+                <span class="cr-pill  rounded-pill px-3 py-1">Premium</span>
               </div>
 
               <div class="mt-3">
